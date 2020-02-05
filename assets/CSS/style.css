@@ -1,0 +1,50 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* background: url(../images/); */
+    margin-bottom: 60px; /* Margin bottom by footer height */
+}
+*{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.text-date{
+    color: #ff933a;
+    font-weight: 700;
+}
+.bg-ambition{
+    background: #ff4242;
+}
+.bg-gray{
+    background: #999999;
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px; /* Set the fixed height of the footer here */
+    line-height: 50px; /* Vertically center the text there */
+    background-color: white;
+    border-top: 1px solid #000000;
+}
+
+.disable-click{
+    pointer-events: none;
+}
+.timeSlotRow{
+    height: 70px;
+}
+.timeDisplay{
+    border-top: 1px solid gray;
+}
+.textInput{
+    height: 50px;
+    resize: none;
+}
+.fa{
+    font-size: 16px;
+}
+
