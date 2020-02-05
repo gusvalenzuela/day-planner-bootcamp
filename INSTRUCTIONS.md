@@ -37,7 +37,7 @@ Poor time management can result in missed meetings and deadlines or create the a
 * GitHub repository with a 
 
 =====================
-unique name - day-planner-bc1920
+unique name - day-planner-bootcamp
 =====================
 
 and a README describing project.

@@ -3,13 +3,16 @@ const mainContentContainer = $(`#mainContentContainer`)
 const dayinHistory = $(`#dayinHistory`)
 const containerRow = $(`#containerRow`)
 const textareaObj = $(`.textInput`)
+const blockquoteFooter = $(`#blockquote-footer`)
+const blockquoteBody = $(`#blockquoteBody`)
+const articleYearSpan = $(`#articleYear`)
 var currentMonth = moment().format(`M`)
 var currentYear = moment().format(`YYYY`)
 var storedSlotData;
 
 
 var dayInHistoryEvent;
-var currentDate = moment().format(`LL`) 
+var currentDate = moment().format(`LLLL`) 
 var optionalUserDefaultText;
 
 function retrievePastArticle(){
@@ -36,19 +39,26 @@ function retrievePastArticle(){
         console.log(`today day is: ` + today + ` and article's pub day is: ` + pubDD)
         pubDate = moment(pubDate).format(`LL`)
         console.log(pubDate)
-        for(i=0;i<len;i++){
-            if(pubDD !== today){
-                console.log(`Not matching: pubDD-`+pubDD+` today-`+today)
-            } else {
-                console.log(`=== MATCH! ===`)
-                console.log(`This is your article to use: ` + article.headline.main)
-                console.log(`Published on: ` + pubDate)
-                return
-            }
-        }
+
+        articleYearSpan.text(moment(pubDate).format(`YYYY`))
+        console.log(article.headline.main)
+        blockquoteBody.text(article.headline.main)
+        // save this for when you want actual day, day
+        // for(i=0;i<len;i++){
+        //     if(pubDD === today){
+        //         console.log(`=== MATCH! ===`)
+        //         console.log(`This is your article to use: ` + article.headline.main)
+        //         console.log(`Published on: ` + pubDate)
+        //         return
+        //     } else {
+        //         console.log(`Not matching: pubDD-`+pubDD+` today-`+today)
+        //     }
+        // }
         // console.log(`This is your article to use: ` + article.headline.main)
         // console.log(`Published on: ` + pubDate)
         // pubDate = moment(pubDate).format(`LL`)
+
+
     
     
         console.log(`======= END response =======`)
@@ -61,10 +71,11 @@ const startTimeSettings = $(`#startTimeSettings`)
 
 
 function init(){
-    // retrievePastArticle()
+    retrievePastArticle()
     currentDayEl.text(currentDate)        
-    // setInterval(() => {
-        // }, 1000);
+    setInterval(() => {
+        currentDayEl.text(currentDate) 
+        }, 1000);
     if((JSON.parse(localStorage.getItem(`storedSlotData`)) === null)){
         storedSlotData = savedTimeSlots;
     } else {
@@ -88,14 +99,14 @@ function printSavedData(){
 
     console.log(`======= printSaveData() function END =======`)
 }
-function generateTimeSlots(time = 9, amt = 9, input = `'cha got planned?`){
+function generateTimeSlots(time = 9, amt = 9, input = `enter text`){
     
     console.log(`======= generateTimeSlots() function START =======`)
     console.log(time, amt, input)
     // var textAreaClass0
-    var textAreaClassPast = `col-8 px-1 h-100 textInput border-none bg-gray`
-    var textAreaClassPresent = `col-8 px-1 h-100 textInput border-none bg-danger`
-    var textAreaClassFuture = `col-8 px-1 h-100 textInput border-none bg-success`
+    var textAreaClassPast = `col col-lg-8 px-1 h-100 textInput border-none bg-gray`
+    var textAreaClassPresent = `col col-lg-8 px-1 h-100 textInput border-none bg-danger`
+    var textAreaClassFuture = `col col-lg-8 px-1 h-100 textInput border-none bg-success`
 
     for(i=0;i<amt;i++){
         var timePrint = moment(`0101 `+time+`:00`).format(`hh:mm A`)
@@ -124,10 +135,10 @@ function generateTimeSlots(time = 9, amt = 9, input = `'cha got planned?`){
             taClass = textAreaClassFuture
         }
 
-        timeDisplay.attr(`class`,`bg-light timeDisplay px-2`).text(timePrint).attr(`title`,`timeDisplay`).attr(`data-date`, moment().format(`YYYYMMDD`));
+        timeDisplay.attr(`class`,`col-2 bg-light timeDisplay px-2 text-right`).text(timePrint).attr(`title`,`timeDisplay`).attr(`data-date`, moment().format(`YYYYMMDD`));
         textareaInput.attr(`class`,taClass).attr(`placeholder`,input).attr(`title`,`textarea`).attr(`id`, `textarea-`+dateStamp).attr(`data-datestamp`, dateStamp);
-        expandBtn.attr(`class`,`btn btn-info rounded-0 fa fa-chevron-down`).attr(`type`,`button`).attr(`title`,`expandBtn`).attr(`id`, `expandBtn-`+dateStamp).attr(`data-toggle`,`disabled`).attr(`data-target`,`#textarea-`+i).attr(`aria-expanded`,`false`).attr(`aria-controls`,`textarea-`+i).attr(`data-datestamp`, dateStamp);
-        saveBtn.attr(`class`,`btn btn-light rounded-0 fa fa-save`).attr( `title`,`saveBtn`).attr(`id`, `saveBtn-`+dateStamp).attr(`data-datestamp`, dateStamp);
+        expandBtn.attr(`class`,`col-1 col-lg btn btn-info rounded-0 fa fa-chevron-down`).attr(`type`,`button`).attr(`title`,`expandBtn`).attr(`id`, `expandBtn-`+dateStamp).attr(`data-toggle`,`disabled`).attr(`data-target`,`#textarea-`+i).attr(`aria-expanded`,`false`).attr(`aria-controls`,`textarea-`+i).attr(`data-datestamp`, dateStamp);
+        saveBtn.attr(`class`,`col-1 col-lg btn btn-light rounded-0 fa fa-save`).attr( `title`,`saveBtn`).attr(`id`, `saveBtn-`+dateStamp).attr(`data-datestamp`, dateStamp);
         containerRow.append(newRow)
         newRow.append(timeDisplay, textareaInput, saveBtn, expandBtn)
         

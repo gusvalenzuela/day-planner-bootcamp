@@ -14,7 +14,7 @@
 <body>
 
     <header class="jumbotron text-center py-3">
-        <h1 class="display-4">Workday Planner</h1>
+        <h1 class="display-4 font-weight-bold">Workday Planner</h1>
         <p class="lead">A simple calendar app for scheduling your work day</p>
         <p id="currentDay" class="lead text-date"></p>
     </header>
@@ -25,8 +25,9 @@
         <!-- AJAX Content DIV  -->
         <div class="row justify-content-center my-3" id="dayinHistory">
             <blockquote class="blockquote text-center">
-                <p class="mb-0 pt-3">Lorem ipsum dolor sit amet, consectetur adiSomeone famous in Source Titlepiscing elit. Integer posuere erat a ante.</p>
-                <footer class="blockquote-footer">This day in 1899</footer>
+                <p class="font-weight-bold">An Historic Article from the NY Times Archive:</p>
+                <p class="mb-0 pt-3" id="blockquoteBody"></p>
+                <footer class="blockquote-footer">This month in <span id="articleYear"></span></footer>
             </blockquote>
         </div>
     </div>
@@ -34,7 +35,7 @@
     <!-- footer  -->
     <footer class="footer py-0">
         <div class="container text-center">
-            <span class="text-muted">&copy; 2020 <a href="https://gusvalenzuela.github.io/gusval-site-bs/portfolio.html" class="text-muted">\\ Gus Valenzuela</a> <a href="https://github.com/gusvalenzuela/workday-planner-bc1920" class="text-danger">\\ code</a></span>
+            <span class="text-muted">Copyright &copy; 2020 <a href="https://gusvalenzuela.github.io/gusval-site-bs/portfolio.html" class="text-muted">\\ Gus Valenzuela</a> <a href="https://github.com/gusvalenzuela/day-planner-bootcamp" class="text-danger">\\ code</a></span>
         </div>
     </footer>
     
