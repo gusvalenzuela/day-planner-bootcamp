@@ -100,26 +100,34 @@ function printSavedData(){
     console.log(`======= printSaveData() function END =======`)
 }
 function generateTimeSlots(time = 9, amt = 9, input = `enter text`){
-    
     console.log(`======= generateTimeSlots() function START =======`)
     console.log(time, amt, input)
-    // var textAreaClass0
+
     var textAreaClassPast = `col col-lg-8 px-1 h-100 textInput border-none bg-gray`
     var textAreaClassPresent = `col col-lg-8 px-1 h-100 textInput border-none bg-danger`
     var textAreaClassFuture = `col col-lg-8 px-1 h-100 textInput border-none bg-success`
 
     for(i=0;i<amt;i++){
-        var timePrint = moment(`0101 `+time+`:00`).format(`hh:mm A`)
+        var timePrint, str;
+
+        if(time > 24){
+            timePrint = moment(`0101 `+(time-24)+`:00`).format(`hh:mm A`)
+            str = moment().add(1, 'day').format(`YYYYMMDD`)
+        } else {
+            str = moment().format(`YYYYMMDD`)
+            timePrint = moment(`0101 `+time+`:00`).format(`hh:mm A`)
+        }
+
         var textareaInput = $(`<textarea>`)
         var timeDisplay = $(`<div>`)
-        var expandBtn = $(`<button>`)
+        var expandBtn = $(`<i>`)
         var saveBtn = $(`<i>`)
-        var expandDiv = $(`<div>`)
+        // var expandDiv = $(`<div>`)
         var newRow = $(`<div>`).attr(`class`, `row mb-1 w-100 justify-content-center timeSlotRow`)
 
         // quick check between current time and time displayed in planner
         var dateNow = moment().format(`YYYYMMDDHH`)
-        var str = moment().format(`YYYYMMDD`)
+        
         var dateStamp
         if(time<10){
             dateStamp = str+`0`+time
@@ -137,19 +145,11 @@ function generateTimeSlots(time = 9, amt = 9, input = `enter text`){
 
         timeDisplay.attr(`class`,`col-2 bg-light timeDisplay px-2 text-right`).text(timePrint).attr(`title`,`timeDisplay`).attr(`data-date`, moment().format(`YYYYMMDD`));
         textareaInput.attr(`class`,taClass).attr(`placeholder`,input).attr(`title`,`textarea`).attr(`id`, `textarea-`+dateStamp).attr(`data-datestamp`, dateStamp);
-        expandBtn.attr(`class`,`col-1 col-lg btn btn-info rounded-0 fa fa-chevron-down`).attr(`type`,`button`).attr(`title`,`expandBtn`).attr(`id`, `expandBtn-`+dateStamp).attr(`data-toggle`,`disabled`).attr(`data-target`,`#textarea-`+i).attr(`aria-expanded`,`false`).attr(`aria-controls`,`textarea-`+i).attr(`data-datestamp`, dateStamp);
-        saveBtn.attr(`class`,`col-1 col-lg btn btn-light rounded-0 fa fa-save`).attr( `title`,`saveBtn`).attr(`id`, `saveBtn-`+dateStamp).attr(`data-datestamp`, dateStamp);
+        expandBtn.attr(`class`,`col-1 btn btn-info rounded-0 fa fa-chevron-down`).attr(`title`,`expandBtn`).attr(`id`, `expandBtn-`+dateStamp).attr(`data-toggle`,`disabled`).attr(`data-target`,`#textarea-`+i).attr(`aria-expanded`,`false`).attr(`aria-controls`,`textarea-`+dateStamp).attr(`data-datestamp`, dateStamp);
+        saveBtn.attr(`class`,`col-1 btn btn-light rounded-0 fa fa-save`).attr( `title`,`saveBtn`).attr(`id`, `saveBtn-`+dateStamp).attr(`data-datestamp`, dateStamp);
         containerRow.append(newRow)
         newRow.append(timeDisplay, textareaInput, saveBtn, expandBtn)
         
-        // console.log(storedSlotData)
-
-        // for(i=0;i<storedSlotData.length;i++){
-        //     if(storedSlotData[i].datestamp === textareaInput[0].dataset.datestamp){
-        //             textareaInput.textContent = storedSlotData[i].message
-        //     }
-        // }
-
         time++
         
     }
@@ -175,16 +175,12 @@ function removeTimeSlots(){
 }
 function savetoStorage(event){
     console.log(`======= Saved to Storage START ======= `)
+
     var el = event.target
-    // var targetDataTime = el.attributes[`data-time`].value
-    // var targetDataDate = el.attributes[`data-date`].value
     var buttonDateStamp = el.attributes[`data-datestamp`].value
-    console.log(`button stamp: ` + buttonDateStamp)
     var winnerTextarea = $(`#textarea-`+buttonDateStamp)
     var winnerMessage = winnerTextarea[0].value
     var winnerStamp = winnerTextarea[0].attributes[`data-datestamp`].value
-    // console.log(storedSlotData[2].datestamp)
-    console.log(winnerStamp)
     var found = false;
 
     // checking to see if timeslot already exists in savedObj
@@ -205,59 +201,14 @@ function savetoStorage(event){
         found = false
     } else {
         console.log(`creating new obj...`)
-        var newObj = {                   
-        }
-        newObj.datestamp = buttonDateStamp
+        var newObj = templateObj
+        newObj.datestamp = winnerStamp
         newObj.message = winnerMessage
         console.log(storedSlotData)
         storedSlotData.push(newObj)
         localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))       // don't forget to update the savedObj
     }
 
-    // for(i=0;i<textareaObj.length;i++){
-    //     var matchStamp = textareaObj[i].attributes[`data-datestamp`].value
-    //     console.log(`matching textarea stamp: `+ matchStamp)
-
-    //     if(matchStamp === buttonDateStamp){
-    //         winnerMessage = textareaObj[i].value
-    //         console.log(storedSlotData.length)
-    //         var found = false;
-            
-    //         // checking to see if timeslot already exists in savedObj
-    //         for(j=0;j<storedSlotData.length;j++){
-    //             if(storedSlotData[j].dateStamp === matchStamp){
-    //                 // if entry already exists, update found variable so no new obj gets inserted
-    //                 found = true
-    //                 console.log(`found a match in the saved logs`)
-    //                 storedSlotData[j].message = winnerMessage                                   // update the value to new text input
-    //                 localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))
-    //                 // return found
-    //             }
-
-    //         }
-    //         // if no entry found in savedObj make new obj from template and insert relevant info
-    //         if(found){
-    //             console.log(`updated logs (i think)...`)
-    //             found = false
-    //         } else {
-    //             console.log(`creating new obj...`)
-    //             var newObj = {                   
-    //             }
-    //             newObj.datestamp = buttonDateStamp
-    //             newObj.message = winnerMessage
-    //             console.log(storedSlotData)
-    //             storedSlotData.push(newObj)
-    //             localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))       // don't forget to update the savedObj
-    //         }
-            
-            
-    //         return
-
-    //     } 
-
-    // }
-
-    
     console.log(`======= Saved to Storage END ======= `)
 }
 
@@ -283,10 +234,13 @@ containerRow.on(`click`, function(e){
             alert(`Expanding`)
             break
         case `timeDisplay`:
-            var t = prompt(`enter new time (1 - 24):`)
 
-            if(isNaN(parseInt(t))) {
-                alert(`please enter a valid number`)
+            // this variable needs to be global to allow for user customization & local storage
+            // will work on later
+            var t = prompt(`enter new time (0 - 23): `)
+
+            if(isNaN(parseInt(t)) || t < 0 || t > 23) {
+                alert(`please enter a valid number (0 - 23)`)
                 break
             } else {
                 t = t
