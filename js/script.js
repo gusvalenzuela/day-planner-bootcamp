@@ -1,14 +1,22 @@
 const currentDayEl = $(`#currentDay`)
 const mainContentContainer = $(`#mainContentContainer`)
 const dayinHistory = $(`#dayinHistory`)
+const timeSettingsBtn = $(`#timeSettingsBtn`)
 const containerRow = $(`#containerRow`)
 const textareaObj = $(`.textInput`)
 const blockquoteFooter = $(`#blockquote-footer`)
 const blockquoteBody = $(`#blockquoteBody`)
 const articleYearSpan = $(`#articleYear`)
+const dateRowDiv = $(`#dateRow`)
 var currentMonth = moment().format(`M`)
 var currentYear = moment().format(`YYYY`)
-var storedSlotData;
+var storedSlotData
+
+if(localStorage.getItem(`userTimeChoice`) === null){
+    t = 9
+} else {
+    t = localStorage.getItem(`userTimeChoice`)
+}
 
 
 var dayInHistoryEvent;
@@ -42,7 +50,7 @@ function retrievePastArticle(){
 
         articleYearSpan.text(moment(pubDate).format(`YYYY`))
         console.log(article.headline.main)
-        blockquoteBody.text(article.headline.main)
+        blockquoteBody.text(article.lead_paragraph)
         // save this for when you want actual day, day
         // for(i=0;i<len;i++){
         //     if(pubDD === today){
@@ -66,13 +74,8 @@ function retrievePastArticle(){
 
 }
 
-//for later
-const startTimeSettings = $(`#startTimeSettings`)
-
-
 function init(){
     retrievePastArticle()
-    currentDayEl.text(currentDate)        
     setInterval(() => {
         currentDayEl.text(currentDate) 
         }, 1000);
@@ -88,6 +91,23 @@ function init(){
 
 init()
 
+dateRowDiv.on(`click`, function(e){
+    var el = e.target
+    console.log(el)
+
+    switch(el.id){
+        case `leftChevron`:
+            alert(`this is the left`)
+            break
+        case `currentDay`:
+            alert(`Today is: ` + currentDate)
+            break
+        case `rightChevron`:
+            alert(`this is the right`)
+            break
+    }
+})
+
 function printSavedData(){
     console.log(`======= printSaveData() function START =======`)
 
@@ -102,6 +122,7 @@ function printSavedData(){
 function generateTimeSlots(time = 9, amt = 9, input = `enter text`){
     console.log(`======= generateTimeSlots() function START =======`)
     console.log(time, amt, input)
+    time = t
 
     var textAreaClassPast = `col col-lg-8 px-1 h-100 textInput border-none bg-gray`
     var textAreaClassPresent = `col col-lg-8 px-1 h-100 textInput border-none bg-danger`
@@ -214,12 +235,17 @@ function savetoStorage(event){
 
 function timeSettings(e){
     // should save this in localStorage and have it preload into default time and amt (in generateSlots)
-    var timeChoice =  prompt(`What time does your work day start?`)
+    var timeChoice =  prompt(`What time does your work day start? (0 - 23)\n0 = midnight\n23 = 11PM`)
     var amtChoice = prompt(`how many hours would you like displayed?`)
-     generateTimeSlots(timeChoice,amtChoice)
+    localStorage.setItem(`userAmtChoice`,amtChoice)
+    localStorage.setItem(`userTimeChoice`,timeChoice)
+    // confirm user input is not empty ? (or handled in generateTimeSlots?)
+    removeTimeSlots()
+    generateTimeSlots(parseInt(timeChoice),amtChoice)
+    alert(`Your settings have been saved!`)
 }
 
-// startTimeSettings.on(`click`, timeSettings)
+timeSettingsBtn.on(`click`, timeSettings)
 
 containerRow.on(`click`, function(e){
     e.preventDefault()
@@ -237,13 +263,14 @@ containerRow.on(`click`, function(e){
 
             // this variable needs to be global to allow for user customization & local storage
             // will work on later
-            var t = prompt(`enter new time (0 - 23): `)
+            t = prompt(`enter new time (0 - 23): `)
 
             if(isNaN(parseInt(t)) || t < 0 || t > 23) {
                 alert(`please enter a valid number (0 - 23)`)
                 break
             } else {
                 t = t
+                localStorage.setItem(`userTimeChoice`,t)
             }
 
             removeTimeSlots()

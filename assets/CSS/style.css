@@ -19,7 +19,7 @@ body {
     background: #ff4242;
 }
 .bg-gray{
-    background: #999999;
+    background: #dbdbdb;
 }
 .footer {
     position: absolute;
@@ -30,7 +30,6 @@ body {
     background-color: white;
     border-top: 1px solid #000000;
 }
-
 .disable-click{
     pointer-events: none;
 }
@@ -46,5 +45,9 @@ body {
 }
 .fa-save{
     font-size: 18px;
+}
+.chevrons:hover{
+    background: #292b2c34;
+    /* opacity: .2; */
 }
 
