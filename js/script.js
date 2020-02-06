@@ -6,16 +6,22 @@ const containerRow = $(`#containerRow`)
 const textareaObj = $(`.textInput`)
 const blockquoteFooter = $(`#blockquote-footer`)
 const blockquoteBody = $(`#blockquoteBody`)
-const articleYearSpan = $(`#articleYear`)
+const blockquoteHeadline = $(`#blockquoteHeadline`)
+const articleDateSpan = $(`#articleDate`)
 const dateRowDiv = $(`#dateRow`)
 var currentMonth = moment().format(`M`)
 var currentYear = moment().format(`YYYY`)
-var storedSlotData
+var storedSlotData, t, amt;
 
 if(localStorage.getItem(`userTimeChoice`) === null){
     t = 9
 } else {
     t = localStorage.getItem(`userTimeChoice`)
+}
+if(localStorage.getItem(`userAmtChoice`) === null){
+    amt = 9
+} else {
+    amt = localStorage.getItem(`userAmtChoice`)
 }
 
 
@@ -33,12 +39,24 @@ function retrievePastArticle(){
         method: "GET"
     }).then(function(res) {
         console.log(`======= response received =======`)
+        console.log(res.response)
     
         var len = res.response.docs.length
-        var rand = Math.floor(Math.random() * len)
         var today = moment().format(`D`)
+        var rand = Math.floor(Math.random() * len)
+        var article = res.response.docs[rand]  
+        
+        // skipping any articles from the archives that don't have a lead paragraph
+        for(i=0;i<len;i++){
+            if(article.abstract === null){
+                console.log(`abstract is null`)
+                 rand = Math.floor(Math.random() * len)
+                 article = res.response.docs[rand]
+            } else {
+                break
+            }
+        }
 
-        var article = res.response.docs[rand]    
         var pubDate = res.response.docs[rand].pub_date
         var pubDD = moment(pubDate).format(`D`)
 
@@ -48,9 +66,11 @@ function retrievePastArticle(){
         pubDate = moment(pubDate).format(`LL`)
         console.log(pubDate)
 
-        articleYearSpan.text(moment(pubDate).format(`YYYY`))
+        articleDateSpan.text(moment(pubDate).format(`LL`))
         console.log(article.headline.main)
-        blockquoteBody.text(article.lead_paragraph)
+        blockquoteHeadline.text(article.headline.main)
+        blockquoteBody.text(article.abstract)
+        $(`#articleSource`).text(article.source)
         // save this for when you want actual day, day
         // for(i=0;i<len;i++){
         //     if(pubDD === today){
@@ -119,10 +139,11 @@ function printSavedData(){
 
     console.log(`======= printSaveData() function END =======`)
 }
-function generateTimeSlots(time = 9, amt = 9, input = `enter text`){
+function generateTimeSlots(time = 9, amount = 9, input = `enter text`){
     console.log(`======= generateTimeSlots() function START =======`)
     console.log(time, amt, input)
     time = t
+    amount = amt 
 
     var textAreaClassPast = `col col-lg-8 px-1 h-100 textInput border-none bg-gray`
     var textAreaClassPresent = `col col-lg-8 px-1 h-100 textInput border-none bg-danger`
