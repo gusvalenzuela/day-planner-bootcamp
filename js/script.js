@@ -35,7 +35,7 @@ function retrievePastArticle(){
     var randYear = (Math.floor(Math.random() * (currentYear - 1851)) + 1851)
 
     $.ajax({
-        url: "https://api.nytimes.com/svc/archive/v1/"+ randYear + "/" + currentMonth + ".json?api-key=" + apiKey,
+        url: "https://api.nytimes.com/svc/archive/v1/"+ randYear + "/" + currentMonth + ".json?api-key=2ObGDPGfogXexClajXxjgalAgy5fUWke",
         method: "GET"
     }).then(function(res) {
         console.log(`======= response received =======`)
