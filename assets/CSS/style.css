@@ -14,6 +14,7 @@ body {
 .text-date{
     color: #ff783a;
     font-weight: 700;
+    word-wrap: break-word;
 }
 .bg-ambition{
     background: #ff4242;
