@@ -1,0 +1,8 @@
+node_modules/
+.env
+public
+solutions
+# docs
+
+daily-standup*.md
+STUF-AND-TODOS.md

@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <!-- touch zoomies  -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- font awesome  -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./Public/css/style.css">
-    <title>📗 Workday Planner 📗</title>
-</head>
-
-<body>
-
+<div class="container p-0">
     <header class="jumbotron text-center py-3 bg-dark text-white rounded-0">
         <h1 class="display-4 font-weight-bold">Workday Planner</h1>
         <p class="lead">A simple calendar app for scheduling your work day</p>
@@ -24,7 +7,7 @@
                 <p class="col-2 chevrons" id="leftChevron">
                     <i class="fa fa-chevron-left"></i>
                 </p>
-                <span id="currentDay" class="col-8 text-date"></span>
+                <span id="currentDay" class="col text-date"></span>
                 <p class="col-2 chevrons" id="rightChevron">
                     <i class="fa fa-chevron-right"></i>
                 </p>
@@ -33,9 +16,9 @@
                 <button class="fa fa-cog" id="timeSettingsBtn"></button>
             </div>
             <div id="modals-div" class="">
-                <div id="time-settings-modal" class="modal">
-                    <!-- Recipe Modal content -->
-                    <div class="modal-content" id="time-settings-modal-content">
+                <div id="settings-modal" class="modal settings-modal">
+                    <div class="settings-modal-content">
+                        <h3>Time Settings</h3>
                     </div>
                 </div>
             </div>
@@ -67,9 +50,6 @@
         </div>
     </footer>
 
-    <!-- moment time JS -->
-    <script src="moment.js"></script>
-    <script src="moment-timezone-with-data.js"></script>
     <!-- bootstrap optional JS  -->
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -81,7 +61,6 @@
         crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <!-- own JS  -->
-    <script src="./Public/js/savedTimeSlots.js"></script>
-    <script src="./Public/js/script.js"></script>
-</body>
-</html>
+    <script src="./js/savedTimeSlots.js"></script>
+    <script src="./js/script.js"></script>
+</div>

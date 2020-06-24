@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<!-- touch zoomies  -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- font awesome  -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link rel="stylesheet" href="./css/style.css">
+	<title>📗 Workday Planner 📗</title>
+</head>
+
+<body>
+
+
+	{{!-- where the handlebars layout is coming in  --}}
+	<main>
+		{{{ body }}}
+	</main>
+
+	{{!-- scripts  --}}
+	<script>
+		let setContractBtnLeft = `calc(-${$(`#open-request-button`).outerWidth() + `px`} + 2.5em)`
+
+		$(window).scroll(function () {
+			if ($(window).scrollTop() + $(window).height() > $(document).height() - 75) {
+				// do something once user reaches end of scroll (ex. show/hide)
+
+			} else {
+				// else do something else (ex. show/hide)
+			}
+		});
+
+		$(`#nav-login-btn`).on(`click`, event => {
+			event.stopPropagation()
+
+			const loginBtn = $(`#nav-login-btn`)
+			const loginModal = event.target.nextElementSibling
+
+			$(`#login-modal`).css({
+				left: loginBtn.position().left - 320 + `px`,			// 300 px of modal width (set in css) + some change
+			})
+
+			if (loginModal.style.display === `block`) {
+				loginModal.style.display = `none`
+			} else {
+				loginModal.style.display = `block`
+			}
+
+		})
+
+
+	</script>
+</body>
+
+</html>
