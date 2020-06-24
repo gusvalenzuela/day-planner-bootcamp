@@ -1,0 +1,257 @@
+/* Custom Stylesheet */
+
+/**
+ * Use this file to override Materialize files so you can update
+ * the core Materialize files in the future
+ *
+ * Made By MaterializeCSS.com
+ */
+
+:root {
+	--main-color: #044a05;
+	--secondary-color: #bdf8a3;
+	/* --accent-color: #; */
+	--bg-linear: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0));
+	--bg-blur: blur(3px);
+}
+body {
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+}
+
+main {
+	flex: 1 0 auto;
+	padding: 0;
+}
+
+body,
+html {
+	background: whitesmoke;
+	/* height: 100%; */
+}
+
+#nav-signup-btn {
+	background: whitesmoke;
+	color: #26a69a;
+}
+
+#right-side-nav li > a {
+	margin: 0 0.5em;
+}
+.modal-footer {
+	height: unset !important;
+	text-align: center !important;
+}
+
+.modal-footer a,
+.modal-footer span {
+	display: contents !important;
+	font-size: 12px;
+	margin: 0;
+	width: max-content;
+	color: blue;
+}
+
+.header-container {
+	margin-bottom: 1.5em;
+}
+
+.login-bottom-text {
+	color: blue;
+}
+
+.banner-text {
+	color: ghostwhite;
+	font-weight: 700;
+	z-index: 22;
+	text-align: center;
+	text-shadow: 0.1em 0.1em black;
+}
+
+.request-container {
+	text-align: left;
+	color: #044a05;
+	border: 5px #bdf8a3;
+	background-color: lightgray;
+	margin-bottom: 5px;
+	padding: 1.5em;
+}
+
+#login-modal {
+	width: 300px;
+	padding: 1em;
+	line-height: 24px !important;
+}
+
+.request-card {
+	padding: 0 !important;
+}
+
+.request-card p {
+	margin: 0.5em 0 0;
+	padding-left: 0 !important;
+}
+
+.request-card .row {
+	margin: 0 0 0.5em;
+}
+
+.request-title {
+	margin: auto;
+}
+
+.request-name,
+.request-date {
+	font-weight: 300;
+	padding-bottom: 0.33em;
+	/* border-bottom: 1px black solid; */
+}
+
+.request-buttons {
+	padding-top: 1em;
+}
+
+.icon-block {
+	padding: 0 15px;
+}
+
+.icon-block .material-icons {
+	font-size: inherit;
+}
+
+.sidenav li a {
+	padding-left: 2.0189em;
+	padding-right: 6.0567em;
+}
+
+/* sidebar in main handlebars  */
+
+#mobile-collapsible {
+	width: auto;
+	/* height: auto; */
+}
+
+#sidenav-logo-div {
+	background: url(../images/artGarden-logo.png);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.materialboxed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 40%;
+	padding: 5px;
+}
+
+.main-container {
+	margin-bottom: 1em;
+}
+
+.page-footer {
+	position: relative !important;
+	bottom: 0 !important;
+	width: 100% !important;
+	background-color: #42b395;
+	color: white;
+	text-align: center !important;
+	height: max-content !important;
+	padding: 10px !important;
+}
+
+.page-footer a {
+	color: white;
+	font-size: small;
+}
+
+.page-footer a:hover {
+	text-decoration: underline;
+}
+
+.page-footer i {
+	color: white;
+	font-size: x-large;
+}
+
+.page-footer ul {
+	margin: 0.25em 0;
+}
+
+#open-request-button {
+	position: fixed;
+	/* left: -80px; */
+	/* bottom:137.2px; */
+	padding: 0 0.6em;
+	height: auto;
+	border-radius: 0;
+}
+
+#request-collapsible {
+	width: 42%;
+	height: auto;
+	padding-bottom: 0;
+}
+
+#open-more {
+	padding-left: 0.125em;
+}
+
+#reset-request-form {
+	margin-left: 2em;
+}
+
+#reset-request-form:hover {
+	text-decoration: underline;
+	color: #42b395;
+}
+
+.profile-image {
+	padding-left: 3px !important;
+	padding-right: 3px !important;
+	border: 2px solid transparent;
+	height: 128px;
+	width: 128px;
+}
+
+.profile-image:hover {
+	border: 2px solid #42b395;
+}
+
+.selected {
+	border: 2px solid #044a05;
+}
+
+.selected:hover {
+	border: 2px solid #044a05;
+}
+
+/* for tablets and mobile  */
+
+@media screen and (min-width: 601px) {
+	#sidenav-trigger {
+		display: none !important;
+	}
+}
+
+/* for tablets and mobile  */
+
+@media screen and (max-width: 992px) {
+	#request-collapsible {
+		width: 69%;
+	}
+}
+
+/* for mobile devices  */
+
+@media screen and (max-width: 576px) {
+	#request-collapsible {
+		width: 100%;
+	}
+	#logo {
+		height: 128px !important;
+		width: 128px !important;
+	}
+}
