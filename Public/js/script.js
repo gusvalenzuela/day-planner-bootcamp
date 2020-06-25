@@ -153,7 +153,7 @@ function init() {
     }, 1000);
 
     if ((JSON.parse(localStorage.getItem(`storedSlotData`)) === null)) {
-        storedSlotData = savedTimeSlots;
+        storedSlotData = [];
     } else {
         storedSlotData = JSON.parse(localStorage.getItem(`storedSlotData`))
     }

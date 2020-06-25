@@ -4,12 +4,12 @@ exports.unregisteredNotes = function (req, res) {
 	// POST route for saving a new note
 	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
 		.then(({ isNewRecord }) => {
+			// if the conditional above finds a match (i.e. not new record) update instead of create
 			if (!isNewRecord) {
 				return db.Note.create(req.body).then(response => {
 					res.json(response)
 				})
 			} else {
-				console.log(response)
 				return db.Note.update({ where: { datestamp: req.body.datestamp } }, { content: req.body.content }).then(results => {
 					res.json(results)
 				})
