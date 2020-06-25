@@ -248,6 +248,7 @@ function removeTimeSlots() {
     // console.log(`======= removeTimeSlots() function END =======`)
 }
 function savetoDBStorage(data) {
+    console.log(data)
 
     $.post(`/api/notes`, data).then(resp => {
         console.log(resp)

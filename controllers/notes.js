@@ -3,14 +3,14 @@ const db = require(`../models`)
 exports.unregisteredNotes = function (req, res) {
 	// POST route for saving a new note
 	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
-		.then(({ isNewRecord }) => {
+		.then((response) => {
 			// if the conditional above finds a match (i.e. not new record) update instead of create
-			if (!isNewRecord) {
+			if (response === null) {
 				return db.Note.create(req.body).then(response => {
 					res.json(response)
 				})
-			} else {
-				return db.Note.update({ where: { datestamp: req.body.datestamp } }, { content: req.body.content }).then(results => {
+			} else if (!response.isNewRecord) {
+				return db.Note.update({ content: req.body.content }, { where: { id: response.dataValues.id } }).then(results => {
 					res.json(results)
 				})
 			}
@@ -18,6 +18,7 @@ exports.unregisteredNotes = function (req, res) {
 		.catch(err => {
 			// Whenever a validation or flag fails, an error is thrown
 			// We can `catch` the error to prevent it from being `thrown`, which could crash our node app
+			// console.log(err)
 			res.json(err)
 		})
 }
