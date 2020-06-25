@@ -240,15 +240,6 @@ function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
 
     // localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))  
 }
-function clearTimeSlots() {
-    console.log(`======= clearTimeSlots() function START =======`)
-
-
-
-
-    console.log(`======= clearTimeSlots() function END =======`)
-
-}
 function removeTimeSlots() {
     // console.log(`======= removeTimeSlots() function START =======`)
 
@@ -257,6 +248,7 @@ function removeTimeSlots() {
     // console.log(`======= removeTimeSlots() function END =======`)
 }
 function savetoDBStorage(data) {
+
     $.post(`/api/notes`, data).then(resp => {
         console.log(resp)
     })
@@ -287,7 +279,7 @@ function savetoLocalStorage(event) {
     if (found) {
         return found = false
     } else {
-        var newObj = templateObj
+        var newObj = {}
         newObj.datestamp = winnerStamp
         newObj.message = winnerMessage
 

@@ -2,10 +2,18 @@ const db = require(`../models`)
 
 exports.unregisteredNotes = function (req, res) {
 	// POST route for saving a new note
-	console.log(req.body)
-	db.Note.create(req.body)
-		.then(response => {
-			res.json(response)
+	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
+		.then(({ isNewRecord }) => {
+			if (!isNewRecord) {
+				return db.Note.create(req.body).then(response => {
+					res.json(response)
+				})
+			} else {
+				console.log(response)
+				return db.Note.update({ where: { datestamp: req.body.datestamp } }, { content: req.body.content }).then(results => {
+					res.json(results)
+				})
+			}
 		})
 		.catch(err => {
 			// Whenever a validation or flag fails, an error is thrown
