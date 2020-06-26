@@ -23,16 +23,16 @@
 			<p class="lead">A simple calendar app for scheduling your work day</p>
 			<div class="container">
 				<div class="row" id="dateRow">
-					<p class="col-2 chevrons" id="leftChevron">
+					<p class="col-2 chevrons" id="leftChevron" style="display: none;">
 						<i class="fa fa-chevron-left"></i>
 					</p>
 					<span id="currentDay" class="col text-date"></span>
-					<p class="col-2 chevrons" id="rightChevron">
+					<p class="col-2 chevrons" id="rightChevron" style="display: none;">
 						<i class="fa fa-chevron-right"></i>
 					</p>
 				</div>
 				<div class="row">
-					<button class="fa fa-cog" id="timeSettingsBtn"></button>
+					<button class="fa fa-cog" id="timeSettingsBtn" disabled></button>
 				</div>
 				<div id="modals-div" class="">
 					<div id="settings-modal" class="modal settings-modal">
@@ -75,40 +75,6 @@
 	<!-- own JS  -->
 	<script src="./js/script.js"></script>
 
-	{{!-- scripts  --}}
-	<script>
-
-		let setContractBtnLeft = `calc(-${$(`#open-request-button`).outerWidth() + `px`} + 2.5em)`
-
-		$(window).scroll(function () {
-			if ($(window).scrollTop() + $(window).height() > $(document).height() - 75) {
-				// do something once user reaches end of scroll (ex. show/hide)
-
-			} else {
-				// else do something else (ex. show/hide)
-			}
-		});
-
-		$(`#nav-login-btn`).on(`click`, event => {
-			event.stopPropagation()
-
-			const loginBtn = $(`#nav-login-btn`)
-			const loginModal = event.target.nextElementSibling
-
-			$(`#login-modal`).css({
-				left: loginBtn.position().left - 320 + `px`,			// 300 px of modal width (set in css) + some change
-			})
-
-			if (loginModal.style.display === `block`) {
-				loginModal.style.display = `none`
-			} else {
-				loginModal.style.display = `block`
-			}
-
-		})
-
-
-	</script>
 </body>
 
 </html>

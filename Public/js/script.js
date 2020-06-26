@@ -230,8 +230,8 @@ function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
             textareaInput.addClass(`bg-success`)
         }
         expandBtn.attr(`class`, `col-1 btn btn-info rounded-0 fa fa-chevron-down`).attr(`title`, `expandBtn`).attr(`id`, `expandBtn-` + dateStamp).attr(`data-toggle`, `disabled`).attr(`data-target`, `#textarea-` + i).attr(`aria-expanded`, `false`).attr(`aria-controls`, `textarea-` + dateStamp).attr(`data-datestamp`, dateStamp);
-        saveBtn.attr(`class`, `col-1 btn btn-light rounded-0 fa fa-save`).attr(`title`, `saveBtn`).attr(`id`, `saveBtn-` + dateStamp).attr(`data-datestamp`, dateStamp);
-        newRow.append(timeDisplay, textareaInput, saveBtn, expandBtn)
+        saveBtn.attr(`class`, `col-1 btn btn-primary rounded-0 fa fa-save`).attr(`title`, `saveBtn`).attr(`id`, `saveBtn-` + dateStamp).attr(`data-datestamp`, dateStamp);
+        newRow.append(timeDisplay, textareaInput, saveBtn)
         containerRow.append(newRow)
 
         time++
