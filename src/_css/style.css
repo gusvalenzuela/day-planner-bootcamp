@@ -1,5 +1,45 @@
-header > * {
-	margin-bottom: 0.5rem;
+@import "./global/reset.css";
+
+html {
+	min-height: 100%;
+	position: relative;
+}
+
+body {
+	margin-bottom: 60px;
+}
+
+* {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+:root {
+	--orange: #ff783a;
+	--backgroundcolor: #f7f7f7 !important;
+	--black: #070707 !important;
+	--black-faded-1: #070707c7 !important;
+	--white: #f4f4f4 !important;
+	--white-faded-1: #f4f4f4c7 !important;
+	--gray: #a7a7a7 !important;
+	--color-past: #797979 !important;
+	--color-current: #b7b7b7 !important;
+	--color-future: #59c044 !important;
+}
+
+header {
+	background: url("images/workdayplanner1.jpg");
+	min-height: 369px;
+}
+
+header > .container {
+	background: var(--white-faded-1);
+	color: var(--black);
+}
+
+header h1,
+header p {
+	margin-bottom: 1rem;
 }
 
 blockquote {
@@ -14,12 +54,22 @@ blockquote {
 
 .text-date {
 	color: var(--orange);
+	font-size: 1.7rem;
 	font-weight: 700;
 	word-wrap: break-word;
 }
 
-.bg-ambition {
-	background: #ff4242;
+.bg-past {
+	background: var(--color-past);
+	color: var(--white-faded-1);
+}
+
+.bg-current {
+	background: var(--color-current);
+}
+
+.bg-future {
+	background: var(--color-future);
 }
 
 .bg-gray {
@@ -49,8 +99,9 @@ blockquote {
 	height: 70px;
 }
 
-.timeDisplay {
+.time-display {
 	border-top: 1px solid #888;
+	padding-top: 0.5rem;
 }
 
 .note-slots {

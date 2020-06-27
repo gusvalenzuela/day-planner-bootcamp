@@ -1,8 +1,7 @@
 import moment from "moment"
 import $ from "jquery"
-import API from "./API"
-import "../_css/index.css"
-require("dotenv").config()
+import API from "./utils/API"
+
 const currentDayEl = $(`#currentDay`)
 const timeSettingsBtn = $(`#timeSettingsBtn`)
 const containerRow = $(`#containerRow`)
@@ -13,7 +12,7 @@ const dateRowDiv = $(`#dateRow`)
 const settingsModal = $(`.settings-modal`)
 
 var storedSlotData, t
-var currentDate = moment().format(`LLLL`)
+var currentDateTime = moment().format(`LLLL`)
 
 timeSettingsBtn.on(`click`, e => {
 	e.preventDefault()
@@ -87,7 +86,7 @@ function init() {
 	retrievePastArticle()
 	// display current date&time on page header
 	setInterval(() => {
-		currentDayEl.text(currentDate)
+		currentDayEl.text(currentDateTime)
 	}, 1000)
 
 	if (JSON.parse(localStorage.getItem(`storedSlotData`)) === null) {
@@ -110,7 +109,7 @@ dateRowDiv.on(`click`, function (e) {
 			alert(`this is the left`)
 			break
 		case `currentDay`:
-			alert(`Today is: ` + currentDate)
+			alert(`Today is: ` + currentDateTime)
 			break
 		case `rightChevron`:
 			alert(`this is the right`)
@@ -131,7 +130,11 @@ function printSavedData() {
 	//     // console.log(storedSlotData[i].datestamp)
 	// }
 }
-function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
+function generateTimeSlots(
+	time = 9,
+	amount = 9,
+	input = `enter your plans here`,
+) {
 	for (let i = 0; i < amount; i++) {
 		var timePrint, str
 
@@ -158,7 +161,7 @@ function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
 		var dateStamp = str + time.toString().padStart(2, "0")
 
 		timeDisplay
-			.attr(`class`, `col-2 bg-light timeDisplay px-2 text-right`)
+			.attr(`class`, `col-2 bg-light time-display px-2 text-right`)
 			.text(timePrint)
 			.attr(`title`, `timeDisplay`)
 			.attr(`data-date`, moment().format(`YYYYMMDD`))
@@ -168,13 +171,7 @@ function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
 			.attr(`title`, `textarea`)
 			.attr(`id`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
-		if (dateStamp === dateNow) {
-			textareaInput.addClass(`bg-warning`)
-		} else if (dateStamp < dateNow) {
-			textareaInput.addClass(`bg-gray`)
-		} else {
-			textareaInput.addClass(`bg-success`)
-		}
+
 		expandBtn
 			.attr(`class`, `col-1 btn btn-info rounded-0 fa fa-chevron-down`)
 			.attr(`title`, `expandBtn`)
@@ -185,11 +182,24 @@ function generateTimeSlots(time = 9, amount = 9, input = `enter text`) {
 			.attr(`aria-controls`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 		saveBtn
-			.attr(`class`, `col-1 btn btn-primary rounded-0 fa fa-save`)
+			.attr(`class`, `col-1 btn btn-dark rounded-0 fa fa-save`)
 			.attr(`title`, `saveBtn`)
 			.attr(`id`, `saveBtn-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
-		newRow.append(timeDisplay, textareaInput, saveBtn)
+
+		newRow.append(timeDisplay, textareaInput)
+
+		if (dateStamp === dateNow) {
+			textareaInput.addClass(`bg-current`)
+			newRow.append(saveBtn)
+		} else if (dateStamp < dateNow) {
+			textareaInput.addClass(`bg-past`)
+			textareaInput.removeAttr(`placeholder`)
+		} else {
+			newRow.append(saveBtn)
+			textareaInput.addClass(`bg-future`)
+		}
+
 		containerRow.append(newRow)
 
 		time++

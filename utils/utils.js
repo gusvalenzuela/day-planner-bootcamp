@@ -1,13 +1,12 @@
 module.exports = {
 	isLoggedIn(req, res, next) {
 		if (req.isAuthenticated()) return next()
-
-		res.redirect("/signin")
+		res.redirect("/login")
 	},
 
 	filterUserResponse(response) {
 		if (response.length > 1) {
-			for (i = 0; i < response.length; i++) {
+			for (let i = 0; i < response.length; i++) {
 				if (response[i].dataValues) {
 					// response[i].dataValues.password = `hunter2`
 					response[i].dataValues.password = `*`.repeat(7)

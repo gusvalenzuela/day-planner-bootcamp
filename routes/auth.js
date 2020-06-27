@@ -3,13 +3,14 @@ const utils = require("../utils/utils")
 
 module.exports = function (app, passport) {
 	app.get("/signup", authController.signup)
-
+	// logged in
 	app.get("/settings", utils.isLoggedIn, authController.settings)
+	app.get("/dashboard", utils.isLoggedIn, authController.dashboard)
+	app.get("/planner", utils.isLoggedIn, authController.planner)
 
-	app.get("/profile", utils.isLoggedIn, authController.profile)
+	app.get("/logout", authController.logout)
 
-	app.get("/homepage", authController.homepage)
-
+	// post routes
 	app.post(
 		"/signup",
 		passport.authenticate("local-signup", {
@@ -19,12 +20,10 @@ module.exports = function (app, passport) {
 	)
 
 	app.post(
-		"/signin",
-		passport.authenticate("local-signin", {
-			successRedirect: "/",
-			failureRedirect: "/signin",
+		"/login",
+		passport.authenticate("local-login", {
+			successRedirect: "/planner",
+			failureRedirect: "/login",
 		}),
 	)
-
-	app.get("/logout", authController.logout)
 }

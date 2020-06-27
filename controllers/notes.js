@@ -3,14 +3,17 @@ const db = require(`../models`)
 exports.unregisteredNotes = function (req, res) {
 	// POST route for saving a new note
 	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
-		.then((response) => {
+		.then(response => {
 			// if the conditional above finds a match (i.e. not new record) update instead of create
 			if (response === null) {
 				return db.Note.create(req.body).then(response => {
 					res.json(response)
 				})
 			} else if (!response.isNewRecord) {
-				return db.Note.update({ content: req.body.content }, { where: { id: response.dataValues.id } }).then(results => {
+				return db.Note.update(
+					{ content: req.body.content },
+					{ where: { id: response.dataValues.id } },
+				).then(results => {
 					res.json(results)
 				})
 			}

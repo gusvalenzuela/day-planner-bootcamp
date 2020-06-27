@@ -9,44 +9,47 @@ exports.settings = function (req, res) {
 	res.render("settings", req.user)
 }
 
-exports.homepage = function (req, res) {
+exports.planner = function (req, res) {
+	var activeUser, loggedIn
 	//checking to see if there's a logged in user detected in the html request
 	if (req.session.passport) {
-		var activeUser = req.session.passport.user
-		var loggedIn = true
+		activeUser = req.session.passport.user
+		loggedIn = true
 	} else {
-		var activeUser = `none`
-		var loggedIn = false
+		activeUser = `none`
+		loggedIn = false
 	}
-
-	db.User.findAll({
-		include: [db.Notes],
+	db.User.findOne({
+		where: { id: activeUser },
+		include: [db.Note],
 		raw: false,
 	}).then(response => {
 		// const filteredResponse = utils.filterUserResponse(response).response
-		res.render(`homepage`, {
-			activeUser: activeUser,
-			data: filteredResponse,
-			user: filteredResponse,
-			requests: filteredResponse,
+		res.render(`planner`, {
+			userID: activeUser,
+			notes: response.dataValues.Notes,
+			email: response.dataValues.email,
+			// requests: response,
 			loggedIn: loggedIn,
 		})
 	})
 }
-exports.signin = function (req, res) {
-	res.render("signin")
+exports.login = function (req, res) {
+	res.render("login")
 }
 
-exports.profile = function (req, res) {
+exports.dashboard = function (req, res) {
+	if (req.user) {
+		console.log(req.user)
+	}
 	db.User.findOne({
-		include: [db.Notes],
+		include: [db.Note],
 		where: {
 			id: req.user.id,
 		},
 		raw: false,
 	}).then(response => {
-		console.log(response)
-		res.render(`profile`, response)
+		res.render("dashboard", response)
 	})
 }
 

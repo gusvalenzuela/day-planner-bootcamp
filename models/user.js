@@ -27,7 +27,6 @@ module.exports = (sequelize, DataTypes) => {
 		User.hasMany(models.Note, {
 			onDelete: "cascade",
 		})
-
 	}
 
 	return User

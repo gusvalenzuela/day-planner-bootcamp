@@ -1,14 +1,15 @@
-<div class="container-lg container-fluid mb-3" id="mainContentContainer">
-    <!-- Timeblocks go here -->
-    <div class="row justify-content-center" id="containerRow"></div>
-    <!-- AJAX Content DIV  -->
-    <div class="row justify-content-center my-3" id="dayinHistory">
-        <blockquote class="blockquote px-4">
-            <h4 class="font-weight-bold">This Month in History:</h4>
-            <p id="blockquoteHeadline"></p>
-            <p class="lead" id="blockquoteBody"></p>
-            <footer class="blockquote-footer"><span id="articleDate"></span>, <cite class="text-info"
-                    id="articleSource"></cite></footer>
-        </blockquote>
+<!-- Profile avatar/bio section -->
+<div class="container main-container">
+  <div class="section no-pad-bot" id="profile-banner">
+    <div class="row justify-content-center" id="profile-header-row">
+      <div class="col p-4 bg-current text-center">
+        {{!-- <i class="material-icons" style="font-size: 200px; align-items: center;">account_circle</i> --}}
+        <h5><strong>Welcome to WORKDAY PLANNER</strong></h5>
+        <p>
+          {{!-- {{dataValues.bio_statement}} --}}
+          <a href="/login">Login</a> to start planning your day.
+        </p>
+      </div>
     </div>
+  </div>
 </div>

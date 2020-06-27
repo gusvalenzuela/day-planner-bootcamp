@@ -1,4 +1,4 @@
-//const webpack = require("webpack");
+// const webpack = require('webpack');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const StyleLintPlugin = require("stylelint-webpack-plugin")
 const path = require("path")
@@ -7,13 +7,20 @@ module.exports = {
 	mode: "production", // "development" || "none"
 	devtool: "inline-sourcemap",
 	context: __dirname,
-	entry: __dirname + "/src/_js/index.js",
+	entry: [__dirname + "/src/index.js", __dirname + "/src/_css/style.css"],
 	output: {
 		path: __dirname + "/Public/",
 		publicPath: "/",
-		filename: "app.js",
+		// filename: "app.js",
 	},
-
+	plugins: [
+		new StyleLintPlugin({
+			configFile: ".stylelintrc", // if your config is in a non-standard place
+			files: "src/**/*.css", // location of your CSS files
+			fix: true, // if you want to auto-fix some of the basic rules
+		}),
+		new MiniCssExtractPlugin(),
+	],
 	module: {
 		rules: [
 			{
@@ -22,22 +29,29 @@ module.exports = {
 				use: ["babel-loader", "eslint-loader"],
 			},
 			{
-				test: /\.(png|jpg|svg)$/,
-				include: path.join(__dirname, "/images"),
-				loader: "url-loader?limit=30000&name=images/[name].[ext]",
+				test: /\.css$/i,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							// Run `postcss-loader` on each CSS `@import`, do not forget that `sass-loader` compile non CSS `@import`'s into a single file
+							// If you need run `sass-loader` and `postcss-loader` on each CSS `@import` please set it to `2`
+							importLoaders: 1,
+						},
+					},
+					MiniCssExtractPlugin.loader,
+				],
 			},
 			{
-				test: /\.css$/i,
-				use: [MiniCssExtractPlugin.loader, "css-loader"],
+				test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+				use: [
+					{
+						loader: "url-loader",
+					},
+				],
+				include: path.join(__dirname, "/src/_css/images"),
 			},
 		],
 	},
-	plugins: [
-		new StyleLintPlugin({
-			configFile: ".stylelintrc", // if your config is in a non-standard place
-			files: "src/**/*.css", // location of your CSS files
-			fix: true, // if you want to auto-fix some of the basic rules
-		}),
-		new MiniCssExtractPlugin("[name].css"),
-	],
 }

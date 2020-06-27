@@ -41,7 +41,7 @@ module.exports = function (passport, db) {
 		),
 
 		passport.use(
-			"local-signin",
+			"local-login",
 			new LocalStrategy(
 				{
 					// by default, local strategy uses username and password, we will override with email
