@@ -6,7 +6,7 @@ const passport = require("passport")
 const session = require("express-session")
 // const compression = require("compression")
 const app = express()
-require("dotenv").config()
+// require("dotenv").config()
 var PORT = process.env.PORT || 8080
 // app.use(compression())
 
