@@ -4,10 +4,11 @@ const routes = require("./routes/index")
 const express = require("express")
 const passport = require("passport")
 const session = require("express-session")
-const compression = require("compression")
+// const compression = require("compression")
 const app = express()
 require("dotenv").config()
 var PORT = process.env.PORT || 8080
+// app.use(compression())
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("Public"))
@@ -19,7 +20,6 @@ app.use(
 	}),
 )
 app.use(express.json())
-app.use(compression())
 
 app.use(
 	session({
