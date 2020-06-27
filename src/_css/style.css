@@ -1,0 +1,141 @@
+header > * {
+	margin-bottom: 0.5rem;
+}
+
+blockquote {
+	margin-bottom: 0.5rem;
+	padding-top: 1rem;
+	text-align: center;
+}
+
+#blockquoteBody {
+	text-align: justify;
+}
+
+.text-date {
+	color: var(--orange);
+	font-weight: 700;
+	word-wrap: break-word;
+}
+
+.bg-ambition {
+	background: #ff4242;
+}
+
+.bg-gray {
+	background: #dbdbdb;
+}
+
+.footer {
+	/* Vertically center the text there */
+	background-color: var(--backgroundcolor);
+	border-top: 1px solid #000;
+	bottom: 0;
+	height: 30px;
+	left: 0;
+
+	/* Set the fixed height of the footer here */
+	line-height: 50px;
+	position: absolute;
+	right: 0;
+	width: 100%;
+}
+
+.disable-click {
+	pointer-events: none;
+}
+
+.timeSlotRow {
+	height: 70px;
+}
+
+.timeDisplay {
+	border-top: 1px solid #888;
+}
+
+.note-slots {
+	border: none;
+	height: 50px;
+	height: 100%;
+	padding-left: 0.25rem;
+	resize: none;
+}
+
+.fa-save {
+	font-size: 18px;
+}
+
+.chevrons:hover {
+	background: #292b2c34;
+
+	/* opacity: .2; */
+}
+
+/* The Modal (background) */
+
+.modal {
+	/* Enable scroll if needed */
+	background-color: var(--black);
+
+	/* Fallback color */
+	background-color: var(--black-faded-1);
+	display: none;
+
+	/* Full width */
+	height: 100%;
+
+	/* Location of the box */
+	left: 0;
+
+	/* Full height */
+	overflow: auto;
+
+	/* Sit on top */
+	padding-top: 100px;
+
+	/* Hidden by default */
+	position: fixed;
+	top: 0;
+	width: 100%;
+
+	/* Stay in place */
+	z-index: 1;
+
+	/* Black w/ opacity */
+}
+
+/* Modal Content */
+
+.settings-modal-content {
+	background-color: var(--backgroundcolor);
+	border: 1px solid #888;
+	margin: auto;
+	padding: 20px;
+	text-align: center;
+	width: 68%;
+}
+
+@media screen and (max-width: 576px) {
+	.modal-content {
+		font-size: small;
+		padding: 20px;
+		width: 100%;
+	}
+}
+
+/* The Close Button */
+
+.close {
+	color: var(--gray);
+	float: right;
+	font-size: 8px;
+	font-weight: 600;
+}
+
+.modal-save-button {
+	background: #0084ffda;
+	margin-top: 0.25em;
+
+	/* float: right; */
+	padding: 0.5em 1em;
+}

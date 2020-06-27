@@ -1,11 +1,10 @@
-const express = require("express")
-const passport = require("passport")
-const session = require("express-session")
 const db = require("./models")
 const authRoute = require("./routes/auth.js")
 const routes = require("./routes/index")
+const express = require("express")
+const passport = require("passport")
+const session = require("express-session")
 const compression = require("compression")
-
 const app = express()
 
 var PORT = process.env.PORT || 8080
@@ -21,7 +20,6 @@ app.use(
 )
 app.use(express.json())
 app.use(compression())
-
 
 app.use(
 	session({
@@ -45,14 +43,8 @@ app.set("view engine", "handlebars")
 app.set("views", __dirname + "/views")
 
 app.get("/", (req, res) => {
-	// console.log(`test`)
 	res.render("index")
 })
-app.get("/signin", (req, res) => {
-	// console.log(`test`)
-	res.render("index")
-})
-
 
 authRoute(app, passport)
 routes(app)

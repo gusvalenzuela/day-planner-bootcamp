@@ -23,12 +23,7 @@ module.exports = function (passport, db) {
 					} else {
 						var data = {
 							email: email,
-
 							password: password,
-
-							firstName: req.body.firstname,
-
-							lastName: req.body.lastname,
 						}
 
 						User.create(data).then(function (newUser) {
@@ -50,11 +45,8 @@ module.exports = function (passport, db) {
 			new LocalStrategy(
 				{
 					// by default, local strategy uses username and password, we will override with email
-
 					usernameField: "email",
-
 					passwordField: "password",
-					// allows us to pass back the entire request to the callback
 				},
 				function (username, password, done) {
 					User.findOne({
