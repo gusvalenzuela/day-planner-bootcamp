@@ -1,5 +1,5 @@
 // const webpack = require('webpack');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+// const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const StyleLintPlugin = require("stylelint-webpack-plugin")
 const path = require("path")
 
@@ -11,7 +11,6 @@ module.exports = {
 	output: {
 		path: __dirname + "/Public/",
 		publicPath: "/",
-		// filename: "app.js",
 	},
 	plugins: [
 		new StyleLintPlugin({
@@ -19,7 +18,6 @@ module.exports = {
 			files: "src/**/*.css", // location of your CSS files
 			fix: true, // if you want to auto-fix some of the basic rules
 		}),
-		new MiniCssExtractPlugin(),
 	],
 	module: {
 		rules: [
@@ -40,7 +38,6 @@ module.exports = {
 							importLoaders: 1,
 						},
 					},
-					MiniCssExtractPlugin.loader,
 				],
 			},
 			{
