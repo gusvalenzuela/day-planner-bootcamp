@@ -5,7 +5,21 @@
     </div>
     <div class="form-group">
         <label for="pwd">Password:</label>
-        <input type="password" name="password" class="form-control" id="pwd">
+        <input type="password" name="password" onchange='check_pwd()' class="form-control" id="pwd">
     </div>
-    <button type="submit" class="btn btn-default">Submit</button>
+    <div class="form-group">
+        <label for="pwd">Confirm Password:</label>
+        <input type="password" name="password2" onchange='check_pwd()' class="form-control" id="pwd2">
+    </div>
+    <button id="login-submit" type="submit" class="btn btn-default" disabled>Submit</button>
 </form>
+<script>
+    function check_pwd() {
+        if (document.getElementById('pwd').value ==
+            document.getElementById('pwd2').value) {
+            document.getElementById('login-submit').disabled = false;
+        } else {
+            document.getElementById('login-submit').disabled = true;
+        }
+    }
+</script>
