@@ -1,14 +1,16 @@
 const authController = require("../controllers/auth.js")
-const utils = require("../utils/utils")
+const notesController = require("../controllers/notes.js")
+const utils = require("../src/utils/utils.js")
 
 module.exports = function (app, passport) {
-	app.get("/signup", authController.signup)
 	// logged in
 	app.get("/settings", utils.isLoggedIn, authController.settings)
 	app.get("/dashboard", utils.isLoggedIn, authController.dashboard)
 	app.get("/planner", utils.isLoggedIn, authController.planner)
 
-	app.get("/logout", authController.logout)
+	//notes
+	app.post(`/api/notes:id`, notesController.postNotes)
+	app.get(`/api/notes:id`, notesController.getUserNotes) // use is_logged in after req
 
 	// post routes
 	app.post(
@@ -26,4 +28,5 @@ module.exports = function (app, passport) {
 			failureRedirect: "/login",
 		}),
 	)
+	app.get("/logout", authController.logout)
 }

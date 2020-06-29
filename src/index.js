@@ -118,17 +118,16 @@ dateRowDiv.on(`click`, function (e) {
 })
 
 function printSavedData() {
-	$.get("/api/notes").then(response => {
+	// currently placing userid in element via handlebars
+	// $(containerRow).data(`userid`)
+
+	$.get("/api/notes" + $(containerRow).data(`userid`)).then(response => {
 		response.forEach(element => {
 			$(`#textarea-` + element.datestamp).text(element.content)
 		})
 	})
 
-	// for (i = 0; i < storedSlotData.length; i++) {
-	//     $(`#textarea-` + storedSlotData[i].datestamp).text(storedSlotData[i].message)
-	//     // console.log(`datestamps in obj are: `)
-	//     // console.log(storedSlotData[i].datestamp)
-	// }
+	console.log()
 }
 function generateTimeSlots(
 	time = 9,
@@ -217,7 +216,7 @@ function removeTimeSlots() {
 function savetoDBStorage(data) {
 	console.log(data)
 
-	$.post(`/api/notes`, data).then(resp => {
+	$.post(`/api/notes` + $(containerRow).data(`userid`), data).then(resp => {
 		console.log(resp)
 	})
 }
@@ -276,6 +275,7 @@ containerRow.on(`click`, function (e) {
 				title: noteStamp,
 				content: noteContent,
 				datestamp: noteStamp,
+				UserId: $(containerRow).data(`userid`), // currently placing it in element via handlebars
 			}
 			savetoLocalStorage(e)
 			savetoDBStorage(noteObj)
