@@ -1,5 +1,9 @@
-<div class="container-lg container-fluid mb-3" id="mainContentContainer">
-    
-    <h1>Welcome {{email}}!</h1>
+<div class="container-lg container-fluid mb-3" id="mainContentContainer" data-received-session="{{loggedIn}}">
+
+    <h1>Welcome {{response.dataValues.email}}!</h1>
     <h4>This is your dashboard.</h4>
+    <p>In the future, you'll be able to see stats regarding your account.</p>
 </div>
+<script>
+    document.getElementById(`nav-dashboard-link`).classList.add(`active`)
+</script>

@@ -3,6 +3,10 @@ const notesController = require("../controllers/notes.js")
 const utils = require("../src/utils/utils.js")
 
 module.exports = function (app, passport) {
+	app.get("/", utils.isLoggedIn, (req, res) => {
+		// req.headers.referer.split(`/`)[req.headers.referer.split(`/`).length - 1] // find the referer (url parsing)
+		res.redirect("/planner")
+	})
 	// logged in
 	app.get("/settings", utils.isLoggedIn, authController.settings)
 	app.get("/dashboard", utils.isLoggedIn, authController.dashboard)

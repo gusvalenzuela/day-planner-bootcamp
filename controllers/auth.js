@@ -32,9 +32,6 @@ exports.planner = function (req, res) {
 }
 
 exports.dashboard = function (req, res) {
-	if (req.user) {
-		console.log(req.user)
-	}
 	db.User.findOne({
 		include: [db.Note],
 		where: {
@@ -42,7 +39,10 @@ exports.dashboard = function (req, res) {
 		},
 		raw: false,
 	}).then(response => {
-		res.render("dashboard", response)
+		res.render("dashboard", {
+			response: response,
+			loggedIn: true,
+		})
 	})
 }
 

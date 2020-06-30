@@ -15,6 +15,19 @@ const settingsModal = $(`.settings-modal`)
 var storedSlotData, t
 var currentDateTime = moment().format(`LLLL`)
 
+// start..
+const activeSession = $(`#mainContentContainer`).data(`received-session`)
+
+if (activeSession) {
+	// hide when signed in
+	$(`#nav-signup-link`).hide()
+	$(`#nav-login-link`).hide()
+
+	// show when signed in
+	$(`#nav-logout-link`).show()
+	$(`#nav-dashboard-link`).show()
+}
+
 timeSettingsBtn.on(`click`, e => {
 	e.preventDefault()
 	callSettingsModal()
