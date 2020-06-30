@@ -1,10 +1,6 @@
 // const utils = require(`../utils/utils`)
 const db = require(`../models`)
 
-exports.signup = function (req, res) {
-	res.render("signup")
-}
-
 exports.settings = function (req, res) {
 	res.render("settings", req.user)
 }
@@ -33,9 +29,6 @@ exports.planner = function (req, res) {
 			loggedIn: loggedIn,
 		})
 	})
-}
-exports.login = function (req, res) {
-	res.render("login")
 }
 
 exports.dashboard = function (req, res) {

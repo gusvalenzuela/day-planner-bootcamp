@@ -1,4 +1,4 @@
-@import "./global/reset.css";
+/* @import "./global/reset.css"; */
 
 html {
 	min-height: 100%;
@@ -20,8 +20,9 @@ body {
 	--black: #070707 !important;
 	--black-faded-1: #070707c7 !important;
 	--white: #f4f4f4 !important;
-	--white-faded-1: #f4f4f4c7 !important;
+	--white-faded-1: #f4f4f4e0 !important;
 	--gray: #a7a7a7 !important;
+	--link-blue: #007bff !important;
 	--color-past: #797979 !important;
 	--color-current: #b7b7b7 !important;
 	--color-future: #59c044 !important;
@@ -50,8 +51,29 @@ blockquote {
 	text-align: center;
 }
 
+form#signup,
+form#login {
+	margin: auto;
+}
+
+form#demo-login {
+	font-size: 12px;
+	margin: auto;
+	margin-top: 3rem;
+}
+
 #blockquoteBody {
 	text-align: justify;
+}
+
+#profile-header-row {
+	line-height: 32px;
+	padding: 6rem 1rem;
+}
+
+.login-container,
+.signup-container {
+	margin-top: 2.65rem;
 }
 
 .text-date {
@@ -91,6 +113,18 @@ blockquote {
 	position: absolute;
 	right: 0;
 	width: 100%;
+}
+
+.link-button {
+	background: none;
+	border: none;
+	color: var(--link-blue);
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.link-button:focus {
+	outline: none;
 }
 
 .disable-click {

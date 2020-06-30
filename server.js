@@ -32,6 +32,7 @@ app.use(passport.initialize())
 
 app.use(passport.session())
 
+// handlebars config
 var exphbs = require("express-handlebars")
 app.engine(
 	"handlebars",
@@ -42,10 +43,7 @@ app.engine(
 app.set("view engine", "handlebars")
 app.set("views", __dirname + "/views")
 
-app.get("/", (req, res) => {
-	res.render("index")
-})
-
+// routing
 authRoute(app, passport)
 routes(app)
 
