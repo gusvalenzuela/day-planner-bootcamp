@@ -1,6 +1,7 @@
 dependencies:
   axios: 0.19.2
   bcrypt: 5.0.0
+  bootstrap: 4.5.0_jquery@3.5.1+popper.js@1.16.1
   express: 4.17.1
   express-handlebars: 4.0.4
   express-session: 1.17.1
@@ -9,6 +10,7 @@ dependencies:
   nodemon: 2.0.4
   passport: 0.4.1
   passport-local: 1.0.0
+  popper.js: 1.16.1
   precss: 4.0.0
   sequelize: 5.22.1
   style-loader: 1.2.1_webpack@4.43.0
@@ -1499,6 +1501,16 @@ packages:
     dev: true
     resolution:
       integrity: sha1-jokKGD2O6aI5OzhExpGkK897yfU=
+  /bootstrap/4.5.0_jquery@3.5.1+popper.js@1.16.1:
+    dependencies:
+      jquery: 3.5.1
+      popper.js: 1.16.1
+    dev: false
+    peerDependencies:
+      jquery: 1.9.1 - 3
+      popper.js: ^1.16.0
+    resolution:
+      integrity: sha512-Z93QoXvodoVslA+PWNdk23Hze4RBYIkpb5h8I2HY2Tu2h7A0LpAgLcyrhrSUyo2/Oxm2l1fRZPs1e5hnxnliXA==
   /boxen/4.2.0:
     dependencies:
       ansi-align: 3.0.0
@@ -5209,7 +5221,6 @@ packages:
     resolution:
       integrity: sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
   /jquery/3.5.1:
-    dev: true
     resolution:
       integrity: sha512-XwIBPqcMn57FxfT+Go5pzySnm4KWkT1Tv7gjrpT1srtf8Weynl6R273VJ5GjkRb51IzMp5nbaPjJXMWeju2MKg==
   /js-base64/2.6.2:
@@ -7010,6 +7021,11 @@ packages:
     dev: true
     resolution:
       integrity: sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==
+  /popper.js/1.16.1:
+    deprecated: 'You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1'
+    dev: false
+    resolution:
+      integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
   /portfinder/1.0.26:
     dependencies:
       async: 2.6.3
@@ -10883,6 +10899,7 @@ specifiers:
   babel-loader: ^7.1.2
   babel-preset-env: ^1.6.0
   bcrypt: ^5.0.0
+  bootstrap: 4.5.0
   bulma: ^0.8.1
   compression: ^1.7.4
   concurrently: ^5.1.0
@@ -10909,6 +10926,7 @@ specifiers:
   npm-run-all: ^4.1.5
   passport: ^0.4.1
   passport-local: ^1.0.0
+  popper.js: 1.16.1
   postcss: ^7.0.26
   postcss-assets: ^4.1.0
   postcss-cli: ^4.1.0

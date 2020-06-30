@@ -1,6 +1,7 @@
 import moment from "moment"
 import $ from "jquery"
 import API from "./utils/API"
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 const currentDayEl = $(`#currentDay`)
 const timeSettingsBtn = $(`#timeSettingsBtn`)
@@ -273,6 +274,7 @@ containerRow.on(`click`, function (e) {
 			].value
 
 			var noteObj = {
+				// userId: userID,
 				title: noteStamp,
 				content: noteContent,
 				datestamp: noteStamp,

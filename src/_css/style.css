@@ -29,6 +29,8 @@ body {
 
 header {
 	background: url("images/workdayplanner1.jpg");
+	background-position: 0% 0%;
+	background-size: cover;
 	min-height: 369px;
 }
 
