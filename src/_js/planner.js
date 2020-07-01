@@ -13,7 +13,24 @@ const dateRowDiv = $(`#dateRow`)
 const settingsModal = $(`.settings-modal`)
 
 var storedSlotData, t
-var currentDateTime = moment().format(`LLLL`)
+var currentDateTime = moment().format(`llll`)
+
+function init() {
+	retrievePastArticle()
+	// display current date&time on page header
+	currentDayEl.text(currentDateTime)
+	setInterval(() => {
+		currentDayEl.text(currentDateTime)
+	}, 1000)
+
+	if (JSON.parse(localStorage.getItem(`storedSlotData`)) === null) {
+		storedSlotData = []
+	} else {
+		storedSlotData = JSON.parse(localStorage.getItem(`storedSlotData`))
+	}
+
+	generateTimeSlots()
+}
 
 timeSettingsBtn.on(`click`, e => {
 	e.preventDefault()
@@ -83,37 +100,29 @@ function retrievePastArticle() {
 	})
 }
 
-function init() {
-	retrievePastArticle()
-	// display current date&time on page header
-	setInterval(() => {
-		currentDayEl.text(currentDateTime)
-	}, 1000)
-
-	if (JSON.parse(localStorage.getItem(`storedSlotData`)) === null) {
-		storedSlotData = []
-	} else {
-		storedSlotData = JSON.parse(localStorage.getItem(`storedSlotData`))
-	}
-
-	generateTimeSlots()
-	printSavedData()
-}
-
 init()
 
 dateRowDiv.on(`click`, function (e) {
 	var el = e.target
+	var parentElement = el.parentElement
 
-	switch (el.id) {
+	switch (el.id || parentElement.id) {
 		case `leftChevron`:
-			alert(`this is the left`)
+			// alert(`this is the left`)
+			currentDateTime = moment(currentDateTime)
+				.subtract(1, `day`)
+				.format(`llll`)
+			currentDayEl.text(currentDateTime)
+			generateTimeSlots()
 			break
 		case `currentDay`:
 			alert(`Today is: ` + currentDateTime)
 			break
 		case `rightChevron`:
-			alert(`this is the right`)
+			// alert(`this is the right`)
+			currentDateTime = moment(currentDateTime).add(1, `day`).format(`llll`)
+			currentDayEl.text(currentDateTime)
+			generateTimeSlots()
 			break
 	}
 })
@@ -135,14 +144,15 @@ function generateTimeSlots(
 	amount = 9,
 	input = `enter your plans here`,
 ) {
+	containerRow.empty()
 	for (let i = 0; i < amount; i++) {
 		var timePrint, str
 
 		if (time > 24) {
 			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hh:mm A`)
-			str = moment().add(1, "day").format(`YYYYMMDD`)
+			str = moment(currentDateTime).add(1, "day").format(`YYYYMMDD`)
 		} else {
-			str = moment().format(`YYYYMMDD`)
+			str = moment(currentDateTime).format(`YYYYMMDD`)
 			timePrint = moment(`0101 ` + time + `:00`).format(`hh:mm A`)
 		}
 
@@ -204,7 +214,7 @@ function generateTimeSlots(
 
 		time++
 	}
-
+	printSavedData()
 	// localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))
 }
 function removeTimeSlots() {
