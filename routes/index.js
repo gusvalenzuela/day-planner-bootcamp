@@ -3,7 +3,8 @@ module.exports = function (app) {
 		res.render("login")
 	})
 
-	app.get("/signup", (req, res) => {
+	app.get("/signup", ({ body }, res) => {
+		console.log(body)
 		res.render("signup")
 	})
 }

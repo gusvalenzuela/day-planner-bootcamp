@@ -11,4 +11,4 @@ A daily planner displaying a typical "9-to-5" schedule in hour segments. User ma
 
 ### TODOs
 - Cycle through days
-- User signup
+- Cycle through hours

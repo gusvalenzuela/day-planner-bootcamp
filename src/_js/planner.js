@@ -1,6 +1,6 @@
 import moment from "moment"
 import $ from "jquery"
-import API from "./utils/API"
+import API from "../utils/API"
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
 const currentDayEl = $(`#currentDay`)
@@ -14,19 +14,6 @@ const settingsModal = $(`.settings-modal`)
 
 var storedSlotData, t
 var currentDateTime = moment().format(`LLLL`)
-
-// start..
-const activeSession = $(`#mainContentContainer`).data(`received-session`)
-
-if (activeSession) {
-	// hide when signed in
-	$(`#nav-signup-link`).hide()
-	$(`#nav-login-link`).hide()
-
-	// show when signed in
-	$(`#nav-logout-link`).show()
-	$(`#nav-dashboard-link`).show()
-}
 
 timeSettingsBtn.on(`click`, e => {
 	e.preventDefault()

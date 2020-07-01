@@ -9,8 +9,8 @@ module.exports = function (app, passport) {
 	})
 	// logged in
 	app.get("/settings", utils.isLoggedIn, authController.settings)
-	app.get("/dashboard", utils.isLoggedIn, authController.dashboard)
-	app.get("/planner", utils.isLoggedIn, authController.planner)
+	app.get("/dashboard", utils.isLoggedIn, authController.pages)
+	app.get("/planner", utils.isLoggedIn, authController.pages)
 
 	//notes
 	app.post(`/api/notes:id`, notesController.postNotes)

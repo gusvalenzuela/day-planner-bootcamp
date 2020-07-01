@@ -5,7 +5,9 @@ exports.settings = function (req, res) {
 	res.render("settings", req.user)
 }
 
-exports.planner = function (req, res) {
+exports.pages = function (req, res) {
+	// for pages that need same data, i'm using a referer to render the appropriate page/view
+	let referer = req._parsedUrl.href.slice(1) // saving the referer in the link
 	var activeUser, loggedIn
 	//checking to see if there's a logged in user detected in the html request
 	if (req.session.passport) {
@@ -20,28 +22,14 @@ exports.planner = function (req, res) {
 		include: [db.Note],
 		raw: false,
 	}).then(response => {
-		// const filteredResponse = utils.filterUserResponse(response).response
-		res.render(`planner`, {
+		if (response.dataValues.password) {
+			response.dataValues.password = "*".repeat(7)
+		}
+		res.render(referer, {
 			userID: activeUser,
-			notes: response.dataValues.Notes,
-			email: response.dataValues.email,
-			// requests: response,
+			// notes: response.dataValues.Notes[0].dataValues,
+			user: response.dataValues,
 			loggedIn: loggedIn,
-		})
-	})
-}
-
-exports.dashboard = function (req, res) {
-	db.User.findOne({
-		include: [db.Note],
-		where: {
-			id: req.user.id,
-		},
-		raw: false,
-	}).then(response => {
-		res.render("dashboard", {
-			response: response,
-			loggedIn: true,
 		})
 	})
 }

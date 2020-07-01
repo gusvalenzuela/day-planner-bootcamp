@@ -1,4 +1,5 @@
 /* @import "./global/reset.css"; */
+@import "./global/font-awesome.min.css";
 
 html {
 	min-height: 100%;
@@ -109,7 +110,7 @@ form#demo-login {
 	left: 0;
 
 	/* Set the fixed height of the footer here */
-	line-height: 50px;
+	line-height: 150px;
 	position: absolute;
 	right: 0;
 	width: 100%;

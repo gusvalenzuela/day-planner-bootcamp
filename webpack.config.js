@@ -3,22 +3,21 @@
 const StyleLintPlugin = require("stylelint-webpack-plugin")
 const path = require("path")
 
-module.exports = {
+var config = {
 	mode: "production", // "development" || "none"
-	devtool: "inline-sourcemap",
 	context: __dirname,
-	// entry: {
-	// 	planner: './src/index.js',
-	// 	style: './src/_css/style.css',
-	// 	// contact: './contact.js'
-	// },
+	entry: {
+		index: "./src/_js/index.js",
+		planner: "./src/_js/planner.js",
+		style: "./src/_css/style.css",
+	},
 	// output: {
 	// 	// filename: '[name].bundle.js',
 	// 	path: path.resolve(__dirname, '/Public/dist'),
 	// },
-	entry: [__dirname + "/src/index.js", __dirname + "/src/_css/style.css"],
+	// entry: [__dirname + "/src/index.js", __dirname + "/src/_css/style.css"],
 	output: {
-		path: __dirname + "/Public/",
+		path: __dirname + "/Public/dist",
 		publicPath: "/",
 	},
 	plugins: [
@@ -60,4 +59,16 @@ module.exports = {
 			},
 		],
 	},
+}
+
+module.exports = (env, argv) => {
+	if (argv.mode === "development") {
+		config.devtool = "inlinesource-map"
+	}
+
+	if (argv.mode === "production") {
+		//...
+	}
+
+	return config
 }
