@@ -7,19 +7,19 @@ module.exports = {
 	mode: "production", // "development" || "none"
 	devtool: "inline-sourcemap",
 	context: __dirname,
-	entry: {
-		planner: './src/index.js',
-		style: './src/_css/style.css',
-		// contact: './contact.js'
-	},
+	// entry: {
+	// 	planner: './src/index.js',
+	// 	style: './src/_css/style.css',
+	// 	// contact: './contact.js'
+	// },
+	// output: {
+	// 	// filename: '[name].bundle.js',
+	// 	path: path.resolve(__dirname, '/Public/dist'),
+	// },
+	entry: [__dirname + "/src/index.js", __dirname + "/src/_css/style.css"],
 	output: {
-		// filename: '[name].bundle.js',
-		path: path.resolve(__dirname, '/Public/dist'),
-	},
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-		},
+		path: __dirname + "/Public/",
+		publicPath: "/",
 	},
 	plugins: [
 		new StyleLintPlugin({
