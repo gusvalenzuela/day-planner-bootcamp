@@ -3,6 +3,7 @@ dependencies:
   axios: 0.19.2
   bcrypt: 5.0.0
   bootstrap: 4.5.0_jquery@3.5.1+popper.js@1.16.1
+  compression: 1.7.4
   express: 4.17.1
   express-handlebars: 4.0.4
   express-session: 1.17.1
@@ -24,7 +25,6 @@ devDependencies:
   babel-preset-env: 1.7.0
   bulma: 0.8.2
   clean-webpack-plugin: 3.0.0_webpack@4.43.0
-  compression: 1.7.4
   concurrently: 5.2.0
   css-loader: 0.28.11
   dotenv: 8.2.0
@@ -1742,7 +1742,6 @@ packages:
     resolution:
       integrity: sha512-vMM/ijYSxX+Sm+nD7Lmc1UgWDy2JcL2nTKqwgEqXuOMU+IGALbXd5MLt/BcjBAPLIx36TtzhzBcSnOP974gcqA==
   /bytes/3.0.0:
-    dev: true
     engines:
       node: '>= 0.8'
     resolution:
@@ -2327,7 +2326,6 @@ packages:
   /compressible/2.0.18:
     dependencies:
       mime-db: 1.44.0
-    dev: true
     engines:
       node: '>= 0.6'
     resolution:
@@ -2341,7 +2339,6 @@ packages:
       on-headers: 1.0.2
       safe-buffer: 5.1.2
       vary: 1.1.2
-    dev: true
     engines:
       node: '>= 0.8.0'
     resolution:
