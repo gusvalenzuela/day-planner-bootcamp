@@ -1,6 +1,7 @@
 // start..
 const activeSession = $(`#mainContentContainer`).data(`received-session`)
 import $ from "jquery"
+import "../_css/style.css"
 
 if (activeSession) {
 	// hide when signed in

@@ -1,4 +1,5 @@
 // const webpack = require('webpack');
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const StyleLintPlugin = require("stylelint-webpack-plugin")
 const path = require("path")
@@ -9,7 +10,7 @@ var config = {
 	entry: {
 		index: "./src/_js/index.js",
 		planner: "./src/_js/planner.js",
-		style: "./src/_css/style.css",
+		// style: "./src/_css/style.css",
 	},
 	// output: {
 	// 	// filename: '[name].bundle.js',
@@ -26,6 +27,7 @@ var config = {
 			files: "src/**/*.css", // location of your CSS files
 			fix: true, // if you want to auto-fix some of the basic rules
 		}),
+		new CleanWebpackPlugin(),
 	],
 	module: {
 		rules: [
