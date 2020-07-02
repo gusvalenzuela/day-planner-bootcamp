@@ -21368,7 +21368,7 @@
 			h = (0, r.default)("#articleDate"),
 			f = (0, r.default)("#dateRow"),
 			p = (0, r.default)(".settings-modal"),
-			M = (0, a.default)().format("llll")
+			M = (0, a.default)().format("dddd, LL")
 		_.on("click", function (e) {
 			e.preventDefault(), y()
 		})
@@ -21484,15 +21484,14 @@
 					n = t.parentElement
 				switch (t.id || n.id) {
 					case "leftChevron":
-						;(M = (0, a.default)(M).subtract(1, "day").format("llll")),
+						;(M = (0, a.default)(M).subtract(1, "day").format("dddd, LL")),
 							u.text(M),
 							Y()
 						break
 					case "currentDay":
-						alert("Today is: " + M)
 						break
 					case "rightChevron":
-						;(M = (0, a.default)(M).add(1, "day").format("llll")),
+						;(M = (0, a.default)(M).add(1, "day").format("dddd, LL")),
 							u.text(M),
 							Y()
 				}
@@ -21551,7 +21550,7 @@
 					case "expandBtn":
 						alert("Expanding")
 						break
-					case "timeDisplay":
+					case "timeDisplayX":
 						if (
 							((d = prompt("enter new time (0 - 23): ")),
 							isNaN(parseInt(d)) || d < 0 || d > 23)
@@ -21559,9 +21558,7 @@
 							alert("please enter a valid number (0 - 23)")
 							break
 						}
-						localStorage.setItem("userTimeChoice", d),
-							(l[0].innerHTML = ""),
-							Y(d)
+						localStorage.setItem("userTimeChoice", d), Y(d)
 				}
 			})
 	},

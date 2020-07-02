@@ -13,7 +13,7 @@ const dateRowDiv = $(`#dateRow`)
 const settingsModal = $(`.settings-modal`)
 
 var storedSlotData, t
-var currentDateTime = moment().format(`llll`)
+var currentDateTime = moment().format(`dddd, LL`)
 
 function init() {
 	retrievePastArticle()
@@ -108,19 +108,17 @@ dateRowDiv.on(`click`, function (e) {
 
 	switch (el.id || parentElement.id) {
 		case `leftChevron`:
-			// alert(`this is the left`)
 			currentDateTime = moment(currentDateTime)
 				.subtract(1, `day`)
-				.format(`llll`)
+				.format(`dddd, LL`)
 			currentDayEl.text(currentDateTime)
 			generateTimeSlots()
 			break
 		case `currentDay`:
-			alert(`Today is: ` + currentDateTime)
+			// alert(`Today is: ` + currentDateTime)
 			break
 		case `rightChevron`:
-			// alert(`this is the right`)
-			currentDateTime = moment(currentDateTime).add(1, `day`).format(`llll`)
+			currentDateTime = moment(currentDateTime).add(1, `day`).format(`dddd, LL`)
 			currentDayEl.text(currentDateTime)
 			generateTimeSlots()
 			break
@@ -217,13 +215,6 @@ function generateTimeSlots(
 	printSavedData()
 	// localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))
 }
-function removeTimeSlots() {
-	// console.log(`======= removeTimeSlots() function START =======`)
-
-	containerRow[0].innerHTML = ``
-
-	// console.log(`======= removeTimeSlots() function END =======`)
-}
 function savetoDBStorage(data) {
 	console.log(data)
 
@@ -295,7 +286,7 @@ containerRow.on(`click`, function (e) {
 		case `expandBtn`:
 			alert(`Expanding`)
 			break
-		case `timeDisplay`:
+		case `timeDisplayX`:
 			// this variable needs to be global to allow for user customization & local storage
 			// will work on later
 			t = prompt(`enter new time (0 - 23): `)
@@ -307,7 +298,6 @@ containerRow.on(`click`, function (e) {
 				localStorage.setItem(`userTimeChoice`, t)
 			}
 
-			removeTimeSlots()
 			generateTimeSlots(t)
 
 			break

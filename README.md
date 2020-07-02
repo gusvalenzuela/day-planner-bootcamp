@@ -10,5 +10,5 @@ A daily planner displaying a typical "9-to-5" schedule in hour segments. User ma
 - A New York Times article from their archives is displayed under the planner, in the "This Month in History" section.
 
 ### TODOs
-- Cycle through days
 - Cycle through hours
+- Dark Mode
