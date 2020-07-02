@@ -4,6 +4,7 @@ dependencies:
   bcrypt: 5.0.0
   bootstrap: 4.5.0_jquery@3.5.1+popper.js@1.16.1
   compression: 1.7.4
+  dotenv: 8.2.0
   express: 4.17.1
   express-handlebars: 4.0.4
   express-session: 1.17.1
@@ -27,7 +28,6 @@ devDependencies:
   clean-webpack-plugin: 3.0.0_webpack@4.43.0
   concurrently: 5.2.0
   css-loader: 0.28.11
-  dotenv: 8.2.0
   eslint: 6.8.0
   eslint-config-prettier: 6.11.0_eslint@6.8.0
   eslint-loader: 4.0.2_eslint@6.8.0+webpack@4.43.0
@@ -3004,7 +3004,7 @@ packages:
     resolution:
       integrity: sha512-uEUyaDKoSQ1M4Oq8l45hSE26SnTxL6snNnqvK/VWx5wJhmff5z0FUVJDKDanor/6w3kzE3i7XZOk+7wC0EXr1A==
   /dotenv/8.2.0:
-    dev: true
+    dev: false
     engines:
       node: '>=8'
     resolution:
