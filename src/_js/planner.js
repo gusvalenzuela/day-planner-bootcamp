@@ -10,8 +10,7 @@ const blockquoteHeadline = $(`#blockquoteHeadline`)
 const articleDateSpan = $(`#articleDate`)
 const dateRowDiv = $(`#dateRow`)
 const settingsModal = $(`.settings-modal`)
-
-var storedSlotData, t
+var t
 var currentDateTime = moment().format(`dddd, LL`)
 
 function init() {
@@ -21,12 +20,6 @@ function init() {
 	setInterval(() => {
 		currentDayEl.text(currentDateTime)
 	}, 1000)
-
-	if (JSON.parse(localStorage.getItem(`storedSlotData`)) === null) {
-		storedSlotData = []
-	} else {
-		storedSlotData = JSON.parse(localStorage.getItem(`storedSlotData`))
-	}
 
 	generateTimeSlots()
 }
@@ -159,8 +152,8 @@ function generateTimeSlots(
 		)
 		var timeDisplay = $(`<div>`)
 		var textareaInput = $(`<textarea>`)
-		var saveBtn = $(`<i>`)
-		var expandBtn = $(`<i>`)
+		var saveBtn = $(`<button>`)
+		var expandBtn = $(`<button>`)
 		// var expandDiv = $(`<div>`)
 
 		// quick check between current time and time displayed in planner
@@ -175,7 +168,7 @@ function generateTimeSlots(
 		textareaInput
 			.attr(`class`, `col col-lg-8 note-slots`)
 			.attr(`placeholder`, input)
-			.attr(`title`, `textarea`)
+			.attr(`title`, input)
 			.attr(`id`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 
@@ -194,16 +187,18 @@ function generateTimeSlots(
 			.attr(`id`, `saveBtn-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 
-		newRow.append(timeDisplay, textareaInput)
+		newRow.append(timeDisplay, textareaInput, saveBtn)
 
 		if (dateStamp === dateNow) {
 			textareaInput.addClass(`bg-current`)
-			newRow.append(saveBtn)
+			// newRow.append(saveBtn)
 		} else if (dateStamp < dateNow) {
-			textareaInput.addClass(`bg-past`)
+			saveBtn.addClass(`bg-past fa fa-hdd-o`)
 			textareaInput.removeAttr(`placeholder`)
+			textareaInput.prop(`disabled`, true)
+			saveBtn.prop(`disabled`, true)
 		} else {
-			newRow.append(saveBtn)
+			// newRow.append(saveBtn)
 			textareaInput.addClass(`bg-future`)
 		}
 
@@ -215,47 +210,9 @@ function generateTimeSlots(
 	// localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))
 }
 function savetoDBStorage(data) {
-	console.log(data)
-
-	$.post(`/api/notes` + $(containerRow).data(`userid`), data).then(resp => {
-		console.log(resp)
+	$.post(`/api/notes` + $(containerRow).data(`userid`), data).then(() => {
+		generateTimeSlots()
 	})
-}
-function savetoLocalStorage(event) {
-	var el = event.target
-	var buttonDateStamp = el.attributes[`data-datestamp`].value
-	var winnerTextarea = $(`#textarea-` + buttonDateStamp)
-	var winnerMessage = winnerTextarea[0].value
-	var winnerStamp = winnerTextarea[0].attributes[`data-datestamp`].value
-	var found = false
-
-	// checking to see if timeslot already exists in savedObj
-	for (let j = 0; j < storedSlotData.length; j++) {
-		if (storedSlotData[j].datestamp === winnerStamp) {
-			// if entry already exists, update found variable so no new obj gets inserted
-			found = true
-			console.log(`found a match in the saved logs`)
-			storedSlotData[j].message = winnerMessage // update the value to new text input
-			localStorage.setItem(`storedSlotData`, JSON.stringify(storedSlotData))
-			// return found
-		}
-	}
-	// if no entry found in savedObj make new obj from template and insert relevant info
-	if (found) {
-		return (found = false)
-	} else {
-		var newObj = {}
-		newObj.datestamp = winnerStamp
-		newObj.message = winnerMessage
-
-		storedSlotData.push(newObj)
-		localStorage.setItem(`storedSlotData`, JSON.stringify(storedSlotData)) // don't forget to update the savedObj
-	}
-
-	setTimeout(() => {
-		// half a second for post to update in DB, so populating at refresh has newest creation/update
-		window.location.href = "/"
-	}, 500)
 }
 
 containerRow.on(`click`, function (e) {
@@ -279,7 +236,6 @@ containerRow.on(`click`, function (e) {
 				datestamp: noteStamp,
 				UserId: $(containerRow).data(`userid`), // currently placing it in element via handlebars
 			}
-			savetoLocalStorage(e)
 			savetoDBStorage(noteObj)
 			break
 		case `expandBtn`:

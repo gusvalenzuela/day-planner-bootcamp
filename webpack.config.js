@@ -10,6 +10,7 @@ var config = {
 	entry: {
 		index: "./src/_js/index.js",
 		planner: "./src/_js/planner.js",
+		dashboard: "./src/_js/dashboard.js",
 		// style: "./src/_css/style.css",
 	},
 	// output: {
