@@ -11,15 +11,16 @@ const articleDateSpan = $(`#articleDate`)
 const dateRowDiv = $(`#dateRow`)
 const settingsModal = $(`.settings-modal`)
 var t
-var currentDateTime = moment().format(`dddd, LL`)
+var currentDateTime = moment().format(`ddd, ll`)
 
+init()
 function init() {
 	retrievePastArticle()
 	// display current date&time on page header
 	currentDayEl.text(currentDateTime)
 	setInterval(() => {
 		currentDayEl.text(currentDateTime)
-	}, 1000)
+	}, 60000)
 
 	generateTimeSlots()
 }
@@ -67,10 +68,10 @@ function retrievePastArticle() {
 		// console.log(article)
 
 		// console.log(`today day is: ` + today + ` and article's pub day is: ` + pubDD)
-		pubDate = moment(pubDate).format(`LL`)
+		pubDate = moment(pubDate).format(`ll`)
 		// console.log(pubDate)
 
-		articleDateSpan.text(moment(pubDate).format(`LL`))
+		articleDateSpan.text(moment(pubDate).format(`ll`))
 		// console.log(article.headline.main)
 		blockquoteHeadline.text(article.headline.main)
 		blockquoteBody.text(article.abstract)
@@ -88,11 +89,9 @@ function retrievePastArticle() {
 		// }
 		// console.log(`This is your article to use: ` + article.headline.main)
 		// console.log(`Published on: ` + pubDate)
-		// pubDate = moment(pubDate).format(`LL`)
+		// pubDate = moment(pubDate).format(`ll`)
 	})
 }
-
-init()
 
 dateRowDiv.on(`click`, function (e) {
 	var el = e.target
@@ -102,7 +101,7 @@ dateRowDiv.on(`click`, function (e) {
 		case `leftChevron`:
 			currentDateTime = moment(currentDateTime)
 				.subtract(1, `day`)
-				.format(`dddd, LL`)
+				.format(`ddd, ll`)
 			currentDayEl.text(currentDateTime)
 			generateTimeSlots()
 			break
@@ -110,7 +109,7 @@ dateRowDiv.on(`click`, function (e) {
 			// alert(`Today is: ` + currentDateTime)
 			break
 		case `rightChevron`:
-			currentDateTime = moment(currentDateTime).add(1, `day`).format(`dddd, LL`)
+			currentDateTime = moment(currentDateTime).add(1, `day`).format(`ddd, ll`)
 			currentDayEl.text(currentDateTime)
 			generateTimeSlots()
 			break
@@ -139,18 +138,18 @@ function generateTimeSlots(
 		var timePrint, str
 
 		if (time > 24) {
-			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hh:mm A`)
+			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hA`)
 			str = moment(currentDateTime).add(1, "day").format(`YYYYMMDD`)
 		} else {
 			str = moment(currentDateTime).format(`YYYYMMDD`)
-			timePrint = moment(`0101 ` + time + `:00`).format(`hh:mm A`)
+			timePrint = moment(`0101 ` + time + `:00`).format(`hA`)
 		}
 
 		var newRow = $(`<div>`).attr(
 			`class`,
-			`row mb-1 w-100 justify-content-center timeSlotRow`,
+			`row justify-content-center time-slot-row`,
 		)
-		var timeDisplay = $(`<div>`)
+		var hourDisplay = $(`<div>`)
 		var textareaInput = $(`<textarea>`)
 		var saveBtn = $(`<button>`)
 		var expandBtn = $(`<button>`)
@@ -160,20 +159,22 @@ function generateTimeSlots(
 		var dateNow = moment().format(`YYYYMMDDHH`)
 		var dateStamp = str + time.toString().padStart(2, "0")
 
-		timeDisplay
-			.attr(`class`, `col-2 bg-light time-display px-2 text-right`)
-			.text(timePrint)
-			.attr(`title`, `timeDisplay`)
+		hourDisplay
+			.attr(`class`, `col-2 col-md-1 hour-display`)
+			.attr(`title`, `hourDisplay`)
 			.attr(`data-date`, moment().format(`YYYYMMDD`))
+		// appending a span inside the hour display div
+		// in order to bring up the time against the minute line
+		hourDisplay.append($(`<span>`).text(timePrint))
 		textareaInput
-			.attr(`class`, `col col-lg-8 note-slots`)
+			.attr(`class`, `col note-slots`)
 			.attr(`placeholder`, input)
 			.attr(`title`, input)
 			.attr(`id`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 
 		expandBtn
-			.attr(`class`, `col-1 btn btn-info rounded-0 fa fa-chevron-down`)
+			.attr(`class`, `col-1 col-md-1 btn btn-info rounded-0 fa fa-chevron-down`)
 			.attr(`title`, `expandBtn`)
 			.attr(`id`, `expandBtn-` + dateStamp)
 			.attr(`data-toggle`, `disabled`)
@@ -182,15 +183,27 @@ function generateTimeSlots(
 			.attr(`aria-controls`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 		saveBtn
-			.attr(`class`, `col-1 btn btn-dark rounded-0 fa fa-save`)
+			.attr(
+				`class`,
+				`col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn`,
+			)
 			.attr(`title`, `saveBtn`)
 			.attr(`id`, `saveBtn-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
 
-		newRow.append(timeDisplay, textareaInput, saveBtn)
+		newRow.append(hourDisplay, textareaInput, saveBtn)
 
 		if (dateStamp === dateNow) {
 			textareaInput.addClass(`bg-current`)
+			// adding a line relative to newly added "time slot" row
+			// line represents the minute relative to the hour segment it is in
+			newRow.prepend(
+				$(
+					`<div id="current-time-line" style="top: ${
+						moment().format(`m`) * 1.6666666666666666667
+					}%;">`,
+				),
+			)
 			// newRow.append(saveBtn)
 		} else if (dateStamp < dateNow) {
 			saveBtn.addClass(`bg-past fa fa-hdd-o`)
@@ -241,7 +254,7 @@ containerRow.on(`click`, function (e) {
 		case `expandBtn`:
 			alert(`Expanding`)
 			break
-		case `timeDisplayX`:
+		case `hourDisplayX`:
 			// this variable needs to be global to allow for user customization & local storage
 			// will work on later
 			t = prompt(`enter new time (0 - 23): `)

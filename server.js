@@ -5,10 +5,11 @@ const express = require("express")
 const passport = require("passport")
 const session = require("express-session")
 const compression = require("compression")
+const dotenv = require("dotenv")
 const app = express()
-require("dotenv").config()
+dotenv.config()
 
-var PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8080
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("Public"))
@@ -52,6 +53,6 @@ require("./config/passport.js")(passport, db)
 
 db.sequelize.sync().then(
 	app.listen(PORT, function () {
-		console.log("App listening on PORT " + PORT)
+		console.log(`\n\t---> App listening on PORT:${PORT}\n`)
 	}),
 )

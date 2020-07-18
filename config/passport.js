@@ -1,7 +1,6 @@
 module.exports = function (passport, db) {
 	const User = db.User
 	const LocalStrategy = require("passport-local").Strategy
-
 	passport.use(
 		"local-signup",
 		new LocalStrategy(
@@ -17,23 +16,24 @@ module.exports = function (passport, db) {
 					},
 				}).then(function (user) {
 					if (user) {
+						console.log("\ntaken\n")
 						return done(null, false, {
-							message: "That email is already taken",
+							message: "Sorry, that email is already taken",
 						})
 					} else {
 						var data = {
 							email: email,
 							password: password,
-							firstName: req.body.firstname,
-							lastName: req.body.lastname,
 						}
 
 						User.create(data).then(function (newUser) {
 							if (!newUser) {
+								console.log("\nhuhhhh\n")
 								return done(null, false)
 							}
 
 							if (newUser) {
+								console.log("\nNEWWWhhh\n")
 								return done(null, newUser)
 							}
 						})
@@ -51,13 +51,13 @@ module.exports = function (passport, db) {
 					passwordField: "password",
 				},
 				function (username, password, done) {
+					console.log(username)
 					User.findOne({
 						where: {
 							email: username,
 						},
 					})
 						.then(user => {
-							console.log(password)
 							if (!user) {
 								return done(null, false, { message: "Incorrect username." })
 							}

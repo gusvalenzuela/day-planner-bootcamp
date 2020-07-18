@@ -1,13 +1,4 @@
-/* @import "./global/reset.css"; */
-
-html {
-	min-height: 100%;
-	position: relative;
-}
-
-body {
-	margin-bottom: 60px;
-}
+@import "./planner.css";
 
 * {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -16,33 +7,45 @@ body {
 
 :root {
 	--orange: #ff783a;
-	--backgroundcolor: #f7f7f7 !important;
+	--charcoal: #2f4858 !important;
+	--platinum: #e7e7e7 !important;
+	--goldcrayola: #f9c784 !important;
 	--black: #070707 !important;
 	--black-faded-1: #070707c7 !important;
 	--white: #f4f4f4 !important;
 	--white-faded-1: #f4f4f4e0 !important;
+	--white-faded-2: #f4f4f49d !important;
 	--gray: #a7a7a7 !important;
 	--link-blue: #007bff !important;
-	--color-past: #797979 !important;
+	--color-past: #2f4858 !important; /* charcoal */
 	--color-current: #b7b7b7 !important;
-	--color-future: #59c044 !important;
+	--color-future: #91b18b !important;
+}
+
+html {
+	margin: 0;
 }
 
 header {
 	background: url("images/workdayplanner1.jpg");
-	background-position: 0% 0%;
+	background-position: 0% 40%;
 	background-size: cover;
-	min-height: 369px;
+	min-height: 128px;
 }
 
-header > .container {
-	background: var(--white-faded-1);
+header > .container-md {
+	align-self: center;
+	background: var(--white-faded-2);
 	color: var(--black);
 }
 
 header h1,
 header p {
 	margin-bottom: 1rem;
+}
+
+main {
+	background: var(--platinum);
 }
 
 blockquote {
@@ -57,9 +60,34 @@ form#login {
 }
 
 form#demo-login {
-	font-size: 12px;
+	background-color: var(--goldcrayola);
+	font-size: 1rem;
 	margin: auto;
 	margin-top: 3rem;
+}
+
+#navbar-user {
+	border: none;
+	color: var(--goldcrayola);
+	float: left;
+}
+
+#signup-err-toast {
+	background-color: var(--platinum);
+	border: 1px solid #000;
+	box-shadow: 1px 1px 2px 1px #000;
+	color: var(--link-blue);
+	font-size: 0.89rem;
+	padding: 0.5rem;
+}
+
+.bg-charcoal {
+	background-color: var(--charcoal);
+}
+
+.form-group > label {
+	float: left;
+	text-align: left;
 }
 
 #blockquoteBody {
@@ -71,9 +99,26 @@ form#demo-login {
 	padding: 6rem 1rem;
 }
 
+.grid-container {
+	background-color: var(--charcoal);
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+}
+
 .login-container,
 .signup-container {
-	margin-top: 2.65rem;
+	margin: 2.65rem auto;
+	max-width: 425px;
+	text-align: center;
+	width: 70%;
+}
+
+.login-container input,
+.signup-container input {
+	box-shadow: inset 1px 1px #0004;
 }
 
 .text-date {
@@ -81,6 +126,10 @@ form#demo-login {
 	font-size: 1.7rem;
 	font-weight: 700;
 	word-wrap: break-word;
+}
+
+.text-goldcrayola {
+	color: var(--goldcrayola);
 }
 
 .bg-past {
@@ -102,17 +151,23 @@ form#demo-login {
 
 .footer {
 	/* Vertically center the text there */
-	background-color: var(--backgroundcolor);
-	border-top: 1px solid #000;
-	bottom: 0;
-	height: 30px;
-	left: 0;
-
-	/* Set the fixed height of the footer here */
-	line-height: 150px;
-	position: absolute;
-	right: 0;
+	background-color: var(--charcoal);
+	border-top: 1px transparent #000;
+	box-shadow: 0 -2px -2px 2px #0004;
+	height: auto;
+	padding: 0.5rem 0;
 	width: 100%;
+}
+
+.footer .wrapper {
+	display: flex;
+	justify-content: space-between;
+	margin: auto 0 !important;
+	padding: 0 1rem !important;
+}
+
+.footer span {
+	letter-spacing: 1px;
 }
 
 .link-button {
@@ -120,32 +175,16 @@ form#demo-login {
 	border: none;
 	color: var(--link-blue);
 	cursor: pointer;
+	padding: 0.25rem;
 	text-decoration: none;
 }
 
-.link-button:focus {
-	outline: none;
+.link-button:hover {
+	text-decoration: underline;
 }
 
 .disable-click {
 	pointer-events: none;
-}
-
-.timeSlotRow {
-	height: 70px;
-}
-
-.time-display {
-	border-top: 1px solid #888;
-	padding-top: 0.5rem;
-}
-
-.note-slots {
-	border: none;
-	height: 50px;
-	height: 100%;
-	padding-left: 0.25rem;
-	resize: none;
 }
 
 .fa-save {
@@ -194,7 +233,7 @@ form#demo-login {
 /* Modal Content */
 
 .settings-modal-content {
-	background-color: var(--backgroundcolor);
+	background-color: var(--color-future);
 	border: 1px solid #888;
 	margin: auto;
 	padding: 20px;
@@ -208,6 +247,20 @@ form#demo-login {
 		padding: 20px;
 		width: 100%;
 	}
+
+	.signup-container,
+	.login-container {
+		width: 90%;
+	}
+}
+
+/* anything above 1200px */
+@media screen and (min-width: 1200px) {
+	/* 
+	.signup-container,
+	.login-container {
+		width: 800px;
+	} */
 }
 
 /* The Close Button */

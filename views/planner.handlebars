@@ -1,9 +1,20 @@
 {{!-- header  --}}
 
-<header class="jumbotron text-center py-3 bg-dark text-white rounded-0">
-    <div class="container">
-        <h1 class="display-4 font-weight-bold">Workday Planner</h1>
-        <p class="lead">A simple calendar app for scheduling your work day</p>
+<header id="planner-header" class="planner-header" data-user_firstname="{{user.firstName}}">
+    <div class="container-md">
+        <div class="row justify-content-end">
+            <h2 class="col-12">Work Day planner
+                <p class="lead">A simple calendar app for scheduling your work day</p>
+            </h2>
+            <button style="display: none;" class="fa fa-cog" id="timeSettingsBtn" disabled></button>
+            <div id="modals-div" class="">
+                <div id="settings-modal" class="modal settings-modal">
+                    <div class="settings-modal-content">
+                        <h3>Time Settings</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row" id="dateRow">
             <p class="col-2 chevrons" id="leftChevron">
                 <i class="fa fa-chevron-left"></i>
@@ -13,25 +24,17 @@
                 <i class="fa fa-chevron-right"></i>
             </p>
         </div>
-        <div class="row justify-content-end">
-            <button class="fa fa-cog" id="timeSettingsBtn" disabled></button>
-        </div>
-        <div id="modals-div" class="">
-            <div id="settings-modal" class="modal settings-modal">
-                <div class="settings-modal-content">
-                    <h3>Time Settings</h3>
-                </div>
-            </div>
-        </div>
+
     </div>
 </header>
 
-<div class="container-lg container-fluid mb-3" id="mainContentContainer" data-received-session="{{loggedIn}}">
-    <h1 class="pb-4 text-center">Welcome, {{user.firstName}}!</h1>
+<div class="container-lg container-fluid" id="mainContentContainer" data-received-session="{{loggedIn}}">
+
+
     <!-- Timeblocks go here -->
     <div data-userid={{userID}} class="row justify-content-center" id="containerRow"></div>
     <!-- AJAX Content DIV  -->
-    <div class="row justify-content-center my-3" id="dayinHistory">
+    <div class="row justify-content-center my-3" id="dayinHistory" style="display: none;">
         <blockquote class="blockquote px-4">
             <h4 class="font-weight-bold">This Month in History:</h4>
             <p id="blockquoteHeadline"></p>
@@ -44,6 +47,10 @@
 
 <script>
     document.getElementById(`nav-planner-link`).classList.add(`active`)
+    // setting the user's firstname in navbar, here
+    document.getElementById(`navbar-user`).textContent = document.getElementById(`planner-header`).dataset.user_firstname
 </script>
 <!-- own JS  -->
 <script src="./dist/planner.js"></script>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>

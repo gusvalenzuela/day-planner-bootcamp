@@ -1,0 +1,104 @@
+.planner-header {
+	display: flex !important;
+	text-align: center;
+}
+
+.planner-header .lead {
+	text-align: center;
+}
+
+textarea {
+	position: relative;
+}
+
+textarea.note-slots:nth-of-type(2n) {
+	background: #c0232350;
+}
+
+.planner-header h2 {
+	font-weight: 800;
+	line-height: 1.2;
+	text-align: center;
+}
+
+.time-slot-row {
+	height: 9.234894vh;
+	margin-bottom: 0.15rem;
+	width: 100%;
+}
+
+.save-btn,
+.note-slots {
+	z-index: 99;
+}
+
+.hour-display {
+	border-top: 1px solid #0000001c;
+	font-size: 1.23rem;
+	font-weight: 600;
+	line-height: 1;
+	padding: 0.25rem 1rem;
+	text-align: right;
+}
+
+.hour-display > span {
+	position: relative;
+	top: -15px;
+	z-index: 97;
+}
+
+.note-slots {
+	border: none;
+	border-top: 1px inset #000;
+	height: 50px;
+	height: 100%;
+	padding-left: 0.25rem;
+	resize: none;
+}
+
+#containerRow {
+	margin: 2rem 0;
+	padding: 0 !important;
+}
+
+#dateRow p {
+	align-self: center;
+	margin: 0;
+	text-align: center;
+}
+
+#dateRow i {
+	font-size: 2.5rem;
+}
+
+#dateRow .chevrons {
+	color: var(--black);
+	padding: 1rem 0;
+}
+
+#current-time-line {
+	border-bottom: 3px dashed #e7000050 !important;
+	position: relative;
+	width: 100%;
+	z-index: 59;
+}
+
+@media screen and (max-width: 768px) {
+	.planner-header .lead,
+	.planner-header h2 {
+		text-align: left;
+	}
+
+	.planner-header h2 {
+		display: none;
+	}
+
+	.planner-header .lead {
+		font-size: 1rem !important;
+		padding-bottom: 0;
+	}
+
+	#currentDay {
+		font-size: 1.5rem;
+	}
+}

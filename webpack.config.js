@@ -65,6 +65,7 @@ var config = {
 }
 
 module.exports = (env, argv) => {
+	console.log(env)
 	if (argv.mode === "development") {
 		config.devtool = "inlinesource-map"
 	}

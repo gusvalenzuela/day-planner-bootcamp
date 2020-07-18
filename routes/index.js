@@ -3,8 +3,8 @@ module.exports = function (app) {
 		res.render("login")
 	})
 
-	app.get("/signup", ({ body }, res) => {
-		console.log(body)
+	app.get("/signup", (req, res) => {
+		// req.flash(`error`,`error message`)
 		res.render("signup")
 	})
 }
