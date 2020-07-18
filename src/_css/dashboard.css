@@ -1,0 +1,89 @@
+#settings {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	height: 100%;
+
+	/* grid-template-columns: minmax(100px, 25%) 1fr; */
+	padding: 15vh 0.5rem;
+}
+
+#user-notes {
+	height: fit-content;
+	padding: 1rem 0.5rem;
+}
+
+h3 {
+	background-color: var(--goldcrayola);
+	margin-bottom: 0 !important;
+	padding: 1rem 0.5rem;
+}
+
+ul {
+	list-style: none;
+	padding: 1rem 0.5rem;
+}
+
+div[role="main"] {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.left-side {
+	background-color: var(--charcoal);
+	flex: 1 1 128px;
+	padding: 1.5rem;
+	padding-right: 0;
+	text-align: right;
+}
+
+.left-side button {
+	background-color: var(--charcoal);
+	border: none;
+	color: var(--platinum);
+	padding-right: 1.5rem;
+}
+
+.left-side .active {
+	background-color: var(--platinum);
+	color: var(--charcoal);
+}
+
+.right-side {
+	background-color: var(--white-faded-1);
+	color: var(--black);
+	flex: 1 1 576px;
+	padding: 2rem 0.5rem;
+}
+
+.dashboard-planner {
+	min-height: 128px !important;
+	padding: 2rem;
+	text-align: center;
+}
+
+.dashboard-planner > h1,
+.dashboard-planner > h4 {
+	background-color: var(--white-faded-1);
+	margin-bottom: 0;
+	padding: 0.2rem;
+}
+
+button[name="save-btn"] {
+	background-color: var(--charcoal);
+	border: none;
+	color: var(--platinum);
+	float: right;
+	padding: 0.5rem 3rem;
+}
+
+#menu-bar ul > li {
+	display: inline-block;
+	margin-right: 8px;
+}
+
+@media screen and (max-width: 768px) {
+	#account-settings,
+	#planner-settings {
+		padding: 1rem 0.5rem;
+	}
+}

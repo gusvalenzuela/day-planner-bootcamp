@@ -12,7 +12,7 @@ export default {
 		return axios.get(queryURI)
 	},
 	getUserNotes: function (id) {
-		console.log(process.env)
+		// console.log(process.env)
 		const queryURI = `/api/notes` + id
 		return axios.get(queryURI)
 	},

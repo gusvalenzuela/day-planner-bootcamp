@@ -1,8 +1,83 @@
 <div class="container-lg container-fluid mb-3" id="mainContentContainer" data-received-session="{{loggedIn}}">
+    <header class="dashboard-planner">
 
-    <h1>Welcome {{user.firstName}}!</h1>
-    <h4>This is your dashboard.</h4>
-    <p>In the future, you'll be able to see stats regarding your account.</p>
+        <h1>Welcome {{user.firstName}}!</h1>
+        <h4>This is your dashboard.</h4>
+    </header>
+    <nav class="menu-bar" id="menu-bar">
+
+        <ul>
+            Jump To:
+            <li>
+                <a href="#settings">Settings</a>
+            </li>
+        </ul>
+    </nav>
+    <section id="user-notes">
+
+        <head>
+            <h3>Notes</h3>
+        </head>
+        <div role="main">
+            <p style="text-align: left;">7/4/2006: Lunch time!</p>
+        </div>
+        <footer>
+            <a href="#">Back to top</a>
+        </footer>
+    </section>
+    <section id="settings">
+
+        <head>
+            <h3>Settings</h3>
+        </head>
+        <div role="main">
+            <div class="left-side">
+                <button id="button-planner" class="active">Planner</button><br>
+                <button id="button-account">Account</button>
+            </div>
+            <div class="right-side">
+                <ul id="planner-settings">
+                    <li>
+                        <label for="#start-hour">Start Time (24h):</label>
+                        <input type="number" value="{{user.startTime}}" min="0" max="24" id="start-hour" />
+                        {{!-- <select name="start-time-ampm" id="start-time-ampm">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select> --}}
+                        <span>(current {{user.startTime}})</span>
+                    </li>
+                    <li>
+                        <label for="#end-time">End Time (24h):</label>
+                        <input type="number" value="{{user.endTime}}" min="0" max="24" id="end-time" />
+                        {{!-- <select name="end-time-ampm" id="end-time-ampm">
+                        <option value="AM">AM</option>
+                        <option value="PM">PM</option>
+                    </select> --}}
+                        <span>(current {{user.endTime}})</span>
+                    </li>
+                    <p><i>(am/pm options coming soon)</i></p>
+                    <button value="Submit" type="submit" name="save-btn">Save</button>
+                </ul>
+                <ul data-userid={{userID}} id="account-settings" style="display: none;">
+                    <li>
+                        <label for="#firstname">First Name:</label>
+                        <input type="text" name="firstname" id="firstname" />
+                    </li>
+                    <li>
+                        <label for="#lastname">Last Name: </label>
+                        <input type="text" name="lastname" id="lastname" />
+                    </li>
+                    <button value="Submit" type="submit" name="save-btn">Save</button>
+                </ul>
+            </div>
+        </div>
+        <footer>
+            <a href="#">Back to top</a>
+
+        </footer>
+    </section>
+
+
 </div>
 <script>
     document.getElementById(`nav-dashboard-link`).classList.add(`active`)
