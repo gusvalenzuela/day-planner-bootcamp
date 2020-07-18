@@ -6,7 +6,7 @@
 }
 
 :root {
-	--orange: #ff783a;
+	--orange: #f58b00;
 	--charcoal: #2f4858 !important;
 	--platinum: #e7e7e7 !important;
 	--goldcrayola: #f9c784 !important;
@@ -27,15 +27,15 @@ html {
 }
 
 header {
-	background: url("images/workdayplanner1.jpg");
-	background-position: 0% 40%;
+	background: url("images/header-1.jpg");
+	background-position: 10% 38%;
 	background-size: cover;
-	min-height: 128px;
+	min-height: 256px;
 }
 
 header > .container-md {
 	align-self: center;
-	background: var(--white-faded-2);
+	background: var(--white-faded-1);
 	color: var(--black);
 }
 
@@ -57,13 +57,14 @@ blockquote {
 form#signup,
 form#login {
 	margin: auto;
+	margin-bottom: 2rem;
 }
 
 form#demo-login {
 	background-color: var(--goldcrayola);
 	font-size: 1rem;
 	margin: auto;
-	margin-top: 3rem;
+	margin-top: 4rem;
 }
 
 #navbar-user {
@@ -110,8 +111,11 @@ form#demo-login {
 
 .login-container,
 .signup-container {
+	/* background-image: url("./images/workdayplanner1.jpg");
+	background-size: cover; */
 	margin: 2.65rem auto;
 	max-width: 425px;
+	padding: 2rem;
 	text-align: center;
 	width: 70%;
 }
@@ -123,8 +127,8 @@ form#demo-login {
 
 .text-date {
 	color: var(--orange);
-	font-size: 1.7rem;
-	font-weight: 700;
+	font-size: 1.9rem;
+	font-weight: 900;
 	word-wrap: break-word;
 }
 
@@ -220,8 +224,6 @@ form#demo-login {
 	padding-top: 100px;
 
 	/* Hidden by default */
-	position: fixed;
-	top: 0;
 	width: 100%;
 
 	/* Stay in place */
@@ -251,6 +253,11 @@ form#demo-login {
 	.signup-container,
 	.login-container {
 		width: 90%;
+	}
+
+	header {
+		/* background-position: center; */
+		min-height: 128px;
 	}
 }
 

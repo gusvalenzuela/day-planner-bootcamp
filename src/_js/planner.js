@@ -138,11 +138,11 @@ function generateTimeSlots(
 		var timePrint, str
 
 		if (time > 24) {
-			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hA`)
+			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hhA`)
 			str = moment(currentDateTime).add(1, "day").format(`YYYYMMDD`)
 		} else {
 			str = moment(currentDateTime).format(`YYYYMMDD`)
-			timePrint = moment(`0101 ` + time + `:00`).format(`hA`)
+			timePrint = moment(`0101 ` + time + `:00`).format(`hhA`)
 		}
 
 		var newRow = $(`<div>`).attr(
