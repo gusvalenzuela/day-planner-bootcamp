@@ -18,8 +18,25 @@
         <head>
             <h3>Notes</h3>
         </head>
-        <div role="main">
-            <p style="text-align: left;">7/4/2006: Lunch time!</p>
+        <div role="main" class="main-notes-container">
+            <table>
+                {{#if notes}}
+                {{#each notes}}
+                <tr>
+                    <th>
+                        {{!-- in div to resize  --}}
+                        <div>
+                            {{this.formattedDate}}
+                        </div>
+                    </th>
+                    <td>{{this.content}}</td>
+                </tr>
+                {{/each}}
+                {{else}}
+                <li>No notes created yet.</li>
+                {{/if}}
+
+            </table>
         </div>
         <footer>
             <a href="#">Back to top</a>
@@ -32,7 +49,7 @@
         </head>
         <div role="main">
             <div class="left-side">
-                <button id="button-planner" class="active">Planner</button><br>
+                <button id="button-planner" class="active">Planner</button>
                 <button id="button-account">Account</button>
             </div>
             <div class="right-side">

@@ -135,7 +135,13 @@ function generateTimeSlots(
 ) {
 	containerRow.empty()
 	for (let i = 0; i < amount; i++) {
-		var timePrint, str
+		var timePrint, str, dateTime
+
+		// keeping a clean ISO date record to match datestamp
+		// moment().set(Object(String, Int));
+		dateTime = moment(currentDateTime)
+			.set({ h: time, m: 0, s: 0, ms: 0 })
+			.format()
 
 		if (time > 24) {
 			timePrint = moment(`0101 ` + (time - 24) + `:00`).format(`hhA`)
@@ -158,7 +164,6 @@ function generateTimeSlots(
 		// quick check between current time and time displayed in planner
 		var dateNow = moment().format(`YYYYMMDDHH`)
 		var dateStamp = str + time.toString().padStart(2, "0")
-
 		hourDisplay
 			.attr(`class`, `col-2 col-md-1 hour-display`)
 			.attr(`title`, `hourDisplay`)
@@ -172,6 +177,7 @@ function generateTimeSlots(
 			.attr(`title`, input)
 			.attr(`id`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
+			.attr(`data-datetime`, dateTime)
 
 		expandBtn
 			.attr(`class`, `col-1 col-md-1 btn btn-info rounded-0 fa fa-chevron-down`)
@@ -182,6 +188,7 @@ function generateTimeSlots(
 			.attr(`aria-expanded`, `false`)
 			.attr(`aria-controls`, `textarea-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
+			.attr(`data-datetime`, dateTime)
 		saveBtn
 			.attr(
 				`class`,
@@ -190,6 +197,7 @@ function generateTimeSlots(
 			.attr(`title`, `saveBtn`)
 			.attr(`id`, `saveBtn-` + dateStamp)
 			.attr(`data-datestamp`, dateStamp)
+			.attr(`data-datetime`, dateTime)
 
 		newRow.append(hourDisplay, textareaInput, saveBtn)
 
@@ -237,6 +245,7 @@ containerRow.on(`click`, function (e) {
 	switch (el.title) {
 		case `saveBtn`:
 			var buttonDateStamp = el.attributes[`data-datestamp`].value
+			var noteDateTime = el.attributes[`data-datetime`].value
 			var noteContent = $(`#textarea-` + buttonDateStamp)[0].value
 			var noteStamp = $(`#textarea-` + buttonDateStamp)[0].attributes[
 				`data-datestamp`
@@ -247,6 +256,7 @@ containerRow.on(`click`, function (e) {
 				title: noteStamp,
 				content: noteContent,
 				datestamp: noteStamp,
+				datetime: noteDateTime,
 				UserId: $(containerRow).data(`userid`), // currently placing it in element via handlebars
 			}
 			savetoDBStorage(noteObj)

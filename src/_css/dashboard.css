@@ -26,11 +26,14 @@ ul {
 div[role="main"] {
 	display: flex;
 	flex-wrap: wrap;
+	padding-bottom: 2.5rem;
 }
 
 .left-side {
 	background-color: var(--charcoal);
+	display: grid;
 	flex: 1 1 128px;
+	grid-auto-rows: max-content;
 	padding: 1.5rem;
 	padding-right: 0;
 	text-align: right;
@@ -40,7 +43,8 @@ div[role="main"] {
 	background-color: var(--charcoal);
 	border: none;
 	color: var(--platinum);
-	padding-right: 1.5rem;
+	max-height: 40px;
+	padding-right: 1rem;
 }
 
 .left-side .active {
@@ -68,6 +72,23 @@ div[role="main"] {
 	padding: 0.2rem;
 }
 
+.main-notes-container {
+	padding: 0.5rem;
+}
+
+.main-notes-container th > div {
+	margin-right: 1rem;
+}
+
+.main-notes-container td {
+	text-transform: uppercase;
+}
+
+.main-notes-container tr {
+	margin-bottom: 0.5rem;
+	text-align: left;
+}
+
 button[name="save-btn"] {
 	background-color: var(--charcoal);
 	border: none;
@@ -85,5 +106,15 @@ button[name="save-btn"] {
 	#account-settings,
 	#planner-settings {
 		padding: 1rem 0.5rem;
+	}
+
+	.left-side {
+		display: flex;
+		padding-bottom: 0;
+		padding-right: 1rem;
+	}
+
+	.left-side button {
+		padding: 0.25rem 1rem 1.5rem;
 	}
 }

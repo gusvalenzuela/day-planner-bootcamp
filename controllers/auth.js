@@ -1,5 +1,6 @@
 // const utils = require(`../utils/utils`)
 const db = require(`../models`)
+const moment = require(`moment`)
 
 exports.settings = function (req, res) {
 	res.render("settings", req.user)
@@ -25,10 +26,20 @@ exports.pages = function (req, res) {
 		if (response.dataValues.password) {
 			response.dataValues.password = "*".repeat(7)
 		}
+
+		// formatting the way i want handlebars to display notes' times here
+		// storing it in notes.formattedDate
+		const notesArray = response.dataValues.Notes.map(note => {
+			note.dataValues.formattedDate = moment(note.datetime).format(
+				`ddd, MMM D - hhA`,
+			)
+			return note.dataValues
+		})
 		res.render(referer, {
 			userID: activeUser,
 			// notes: response.dataValues.Notes[0].dataValues,
 			user: response.dataValues,
+			notes: notesArray,
 			loggedIn: loggedIn,
 		})
 	})

@@ -2,7 +2,6 @@ const db = require(`../models`)
 
 exports.postNotes = function (req, res) {
 	// POST route for saving a new note
-	console.log(req.body)
 	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
 		.then(response => {
 			// if the conditional above finds a match (i.e. not new record) update instead of create

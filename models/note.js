@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
 			// 	len: [1, 128],
 			// },
 		},
+		datetime: {
+			type: DataTypes.DATE,
+			// validate: {
+			// 	len: [1, 128],
+			// },
+		},
 	})
 
 	Note.associate = models => {
