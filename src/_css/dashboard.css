@@ -73,20 +73,24 @@ div[role="main"] {
 }
 
 .main-notes-container {
+	max-height: 42vh;
+	overflow: auto;
 	padding: 0.5rem;
 }
 
 .main-notes-container th > div {
 	margin-right: 1rem;
+	min-width: max-content;
+}
+
+.main-notes-container th,
+.main-notes-container td {
+	vertical-align: baseline;
 }
 
 .main-notes-container td {
+	padding: 10px;
 	text-transform: uppercase;
-}
-
-.main-notes-container tr {
-	margin-bottom: 0.5rem;
-	text-align: left;
 }
 
 button[name="save-btn"] {
