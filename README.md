@@ -3,6 +3,8 @@
 
 ## [Try it yourself!](https://workdayplanner.herokuapp.com/)
 
+![Image](./src/screenshot1.PNG)
+
 # Description
 A daily planner displaying a typical "9-to-5" schedule in hour segments. User may enter notes into the text-area and save.
 
