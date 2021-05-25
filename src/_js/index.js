@@ -1,14 +1,17 @@
 // start..
-const activeSession = $(`#mainContentContainer`).data(`received-session`)
-import $ from "jquery"
+const mainContainer = document.getElementById("mainContentContainer")
+const navSignupLink = document.getElementById("nav-signup-link")
+const navLoginLink = document.getElementById("nav-login-link")
+const navLogoutLink = document.getElementById("nav-logout-link")
+const navDashboardLink = document.getElementById("nav-dashboard-link")
 import "../_css/style.css"
 
-if (activeSession) {
+if (mainContainer && mainContainer.dataset.receivedSession === "true") {
 	// hide when signed in
-	$(`#nav-signup-link`).hide()
-	$(`#nav-login-link`).hide()
+	navSignupLink.style.display = "none"
+	navLoginLink.style.display = "none"
 
 	// show when signed in
-	$(`#nav-logout-link`).show()
-	$(`#nav-dashboard-link`).show()
+	navLogoutLink.style.display = ""
+	navDashboardLink.style.display = ""
 }
