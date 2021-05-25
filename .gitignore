@@ -3,5 +3,9 @@ node_modules/
 solutions
 # docs
 
-daily-standup*.md
-STUF-AND-TODOS.md
+# DISTRIBUTION
+dist/
+Public/dist/
+
+#  CONFIGS
+config/config.js
