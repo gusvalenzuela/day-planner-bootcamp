@@ -1,7 +1,6 @@
 // const webpack = require('webpack');
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 // const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const StyleLintPlugin = require("stylelint-webpack-plugin")
 const path = require("path")
 
 var config = {
@@ -22,20 +21,18 @@ var config = {
 		path: __dirname + "/Public/dist",
 		publicPath: "/",
 	},
-	plugins: [
-		new StyleLintPlugin({
-			configFile: ".stylelintrc", // if your config is in a non-standard place
-			files: "src/**/*.css", // location of your CSS files
-			fix: true, // if you want to auto-fix some of the basic rules
-		}),
-		new CleanWebpackPlugin(),
-	],
+	plugins: [new CleanWebpackPlugin()],
 	module: {
 		rules: [
 			{
-				test: /\.(js)$/,
-				exclude: [/node_modules/],
-				use: ["babel-loader", "eslint-loader"],
+				test: /\.m?js$/,
+				exclude: /node_modules/,
+				use: {
+					loader: "babel-loader",
+					options: {
+						presets: [["@babel/preset-env", { targets: "defaults" }]],
+					},
+				},
 			},
 			{
 				test: /\.css$/i,
@@ -62,12 +59,12 @@ var config = {
 			},
 		],
 	},
+	// clea
 }
 
 module.exports = (env, argv) => {
-	console.log(env)
 	if (argv.mode === "development") {
-		config.devtool = "inlinesource-map"
+		// config.devtool = "inlinesource-map"
 	}
 
 	if (argv.mode === "production") {
