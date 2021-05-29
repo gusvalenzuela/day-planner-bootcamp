@@ -1,5 +1,6 @@
 const authController = require("../controllers/auth.js")
 const notesController = require("../controllers/notes.js")
+// const apiController = require("../controllers/api.js")
 const utils = require("../src/utils/utils.js")
 
 module.exports = function (app, passport) {
@@ -13,8 +14,11 @@ module.exports = function (app, passport) {
 	app.get("/planner", utils.isLoggedIn, authController.pages)
 
 	//notes
-	app.post(`/api/notes:id`, notesController.postNotes)
-	app.get(`/api/notes:id`, notesController.getUserNotes) // use is_logged in after req
+	app.post(`/api/notes`, utils.isLoggedIn, notesController.postNotes)
+	app.get(`/api/notes`, utils.isLoggedIn, notesController.getUserNotes) // use is_logged in after req
+
+	// fetching nyt articles
+	// app.get(`/api/articles`, apiController.getArticle)
 
 	// post routes
 	app.post(
