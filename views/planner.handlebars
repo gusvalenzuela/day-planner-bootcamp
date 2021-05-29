@@ -6,7 +6,7 @@
             <h2 class="col-12">Work Day Planner
                 <p class="lead">A simple calendar app for scheduling your work day</p>
             </h2>
-            <button style="display: none;" class="fa fa-cog" id="timeSettingsBtn" disabled></button>
+            <button style="display: none;" class="fa fa-cog" id="timeSettingsBtn" ></button>
             <div id="modals-div" class="">
                 <div id="settings-modal" class="modal settings-modal">
                     <div class="settings-modal-content">
@@ -32,7 +32,54 @@
 
 
     <!-- Timeblocks go here -->
-    <div data-userid={{userID}} class="row justify-content-center" id="containerRow"></div>
+    <div data-userid={{userID}} class="row justify-content-center" id="timeblockContainer">
+        {{!-- First timeblock  --}}
+        <div id="timeblock-0" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-1" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-2" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-3" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-4" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-5" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-6" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-7" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+        <div id="timeblock-8" class="row justify-content-center time-slot-row">
+            <section title="hourDisplay" class="col-2 col-md-1 hour-display"><span>XXAM</span></section>
+            <textarea data-datetime="" data-datestamp="" placeholder="" class="col note-slots"></textarea>
+            <button data-datetime="" data-datestamp="" title="saveBtn" class="col-2 col-md-1 btn btn-dark rounded-0 fa fa-save save-btn"></button>
+        </div>
+    </div>
     <!-- AJAX Content DIV  -->
     <div class="row justify-content-center my-3" id="dayinHistory" style="display: none;">
         <blockquote class="blockquote px-4">
@@ -53,4 +100,4 @@
 <!-- own JS  -->
 <script src="./dist/planner.js"></script>
 
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+{{!-- <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script> --}}
