@@ -1,7 +1,5 @@
 import moment from "moment"
-// import API from "../utils/API"
-import "core-js/stable/promise"
-import "regenerator-runtime/runtime"
+import API from "../utils/API"
 import "../_css/planner.css"
 
 const currentDayHTMLElement = document.getElementById("currentDay")
@@ -18,7 +16,6 @@ const USER_ID = Number(timeblockHTMLContainer.dataset.userid) || undefined
 init()
 
 function init() {
-	// retrievePastArticle()
 	// display current date&time on page header
 	currentDayHTMLElement.textContent = currentDateTimeFormatted
 	setInterval(() => {
@@ -51,53 +48,6 @@ function callSettingsModal() {
 	window.addEventListener("click", handleWindowEvents)
 }
 
-// function retrievePastArticle() {
-// 	API.getArticle().then(function (res) {
-// 		let len = res.response.docs.length
-// 		let rand = Math.floor(Math.random() * len)
-// 		let article = res.response.docs[rand]
-
-// 		// skipping any articles from the archives that don't have a lead paragraph
-// 		for (let i = 0; i < len; i++) {
-// 			if (article.abstract === null) {
-// 				console.log(`abstract is null`)
-// 				rand = Math.floor(Math.random() * len)
-// 				article = res.response.docs[rand]
-// 			} else {
-// 				break
-// 			}
-// 		}
-
-// 		let pubDate = res.response.docs[rand].pub_date
-
-// 		// console.log(article)
-
-// 		// console.log(`today day is: ` + today + ` and article's pub day is: ` + pubDD)
-// 		pubDate = moment(pubDate).format(`ll`)
-// 		// console.log(pubDate)
-
-// 		articleDateSpan.text(moment(pubDate).format(`ll`))
-// 		// console.log(article.headline.main)
-// 		blockquoteHeadline.text(article.headline.main)
-// 		blockquoteBody.text(article.abstract)
-// 		$(`#articleSource`).text(article.source)
-// 		// save this for when you want actual day, day
-// 		// for(i=0;i<len;i++){
-// 		//     if(pubDD === today){
-// 		//         console.log(`=== MATCH! ===`)
-// 		//         console.log(`This is your article to use: ` + article.headline.main)
-// 		//         console.log(`Published on: ` + pubDate)
-// 		//         return
-// 		//     } else {
-// 		//         console.log(`Not matching: pubDD-`+pubDD+` today-`+today)
-// 		//     }
-// 		// }
-// 		// console.log(`This is your article to use: ` + article.headline.main)
-// 		// console.log(`Published on: ` + pubDate)
-// 		// pubDate = moment(pubDate).format(`ll`)
-// 	})
-// }
-
 function handleDateRowEvents(e) {
 	e.stopPropagation()
 	let el = e.target
@@ -119,17 +69,18 @@ function handleDateRowEvents(e) {
 	currentDayHTMLElement.textContent = currentDateTime.format(`ddd, ll`)
 }
 
-async function printSavedData() {
+function printSavedData() {
 	// currently placing userid in element via handlebars
-	const userData = await fetch(`/api/notes${USER_ID}`).then(r => r.json())
-
-	userData.forEach(note => {
-		const currentTextareaElement = document.getElementById(
-			`textarea-${note.datestamp}`,
-		)
-		if (currentTextareaElement) {
-			currentTextareaElement.value = note.content
-		}
+	API.getUserNotes(USER_ID).then(userNotes => {
+		// console.log(userNotes)
+		userNotes.forEach(note => {
+			const currentTextareaElement = document.getElementById(
+				`textarea-${note.datestamp}`,
+			)
+			if (currentTextareaElement) {
+				currentTextareaElement.value = note.content
+			}
+		})
 	})
 }
 
@@ -199,7 +150,6 @@ function generateTimeSlots(
 
 		// appending a span inside the hour display div
 		// in order to bring up the time against the minute line
-		// hDisplay.dataset.date = moment().format(`YYYYMMDD`)
 		hDisplay.firstChild.textContent = timePrint
 
 		textDisplay.id = `textarea-${dateStamp}`
@@ -210,17 +160,6 @@ function generateTimeSlots(
 		saveButton.id = `saveBtn-${dateStamp}`
 		saveButton.dataset.datestamp = dateStamp
 		saveButton.dataset.datetime = dateTime
-
-		// expandBtn
-		// 	.attr(`class`, `col-1 col-md-1 btn btn-info rounded-0 fa fa-chevron-down`)
-		// 	.attr(`title`, `expandBtn`)
-		// 	.attr(`id`, `expandBtn-` + dateStamp)
-		// 	.attr(`data-toggle`, `disabled`)
-		// 	.attr(`data-target`, `#textarea-` + i)
-		// 	.attr(`aria-expanded`, `false`)
-		// 	.attr(`aria-controls`, `textarea-` + dateStamp)
-		// 	.attr(`data-datestamp`, dateStamp)
-		// 	.attr(`data-datetime`, dateTime)
 
 		if (dateStamp === dateNow) {
 			textDisplay.classList.add(`bg-current`)
