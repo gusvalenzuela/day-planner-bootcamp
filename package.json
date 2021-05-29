@@ -1,6 +1,6 @@
 {
 	"name": "workday_planner",
-	"version": "2.0.8",
+	"version": "2.1.12",
 	"description": "",
 	"private": true,
 	"dependencies": {
@@ -45,7 +45,7 @@
 		"prettier": "^2.3.0",
 		"style-loader": "^2.0.0",
 		"url-loader": "^4.1.1",
-		"webpack": "^5.37.1",
+		"webpack": "^5.38.1",
 		"webpack-cli": "^4.7.0",
 		"webpack-dev-server": "^3.11.2"
 	},
