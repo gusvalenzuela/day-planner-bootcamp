@@ -1,8 +1,12 @@
 const db = require(`../models`)
 
 exports.postNotes = function (req, res) {
+	const loggedUserID = req.user && req.user.id
+
 	// POST route for saving a new note
-	db.Note.findOne({ where: { datestamp: req.body.datestamp } })
+	db.Note.findOne({
+		where: { datestamp: req.body.datestamp, UserId: loggedUserID },
+	})
 		.then(response => {
 			// if the conditional above finds a match (i.e. not new record) update instead of create
 			if (response === null) {
@@ -20,25 +24,14 @@ exports.postNotes = function (req, res) {
 		.catch(err => {
 			// Whenever a validation or flag fails, an error is thrown
 			// We can `catch` the error to prevent it from being `thrown`, which could crash our node app
-			// console.log(err)
 			res.json(err)
 		})
 }
-exports.getNotes = function (req, res) {
-	// POST route for saving a new note
-	// console.log(req.body)
-	db.Note.findAll({})
-		.then(response => {
-			res.json(response)
-		})
-		.catch(err => {
-			// Whenever a validation or flag fails, an error is thrown
-			// We can `catch` the error to prevent it from being `thrown`, which could crash our node app
-			res.json(err)
-		})
-}
+
 exports.getUserNotes = function (req, res) {
-	db.Note.findAll({ where: { UserId: req.params.id } })
+	const loggedUserID = req.user && req.user.id
+
+	db.Note.findAll({ where: { UserId: loggedUserID } })
 		.then(response => {
 			res.json(response)
 		})
