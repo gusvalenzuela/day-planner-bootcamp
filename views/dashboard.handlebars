@@ -1,103 +1,143 @@
-<div class="container-lg container-fluid mb-3" id="mainContentContainer" data-received-session="{{loggedIn}}">
-    <header class="dashboard-planner">
+<div
+	class="container-lg container-fluid mb-3"
+	id="mainContentContainer"
+	data-received-session="{{loggedIn}}"
+>
+	<header class="dashboard-planner">
 
-        <h1>Welcome {{user.firstName}}!</h1>
-        <h4>This is your dashboard.</h4>
-    </header>
-    <nav class="menu-bar" id="menu-bar">
+		<h1>Welcome {{user.firstName}}!</h1>
+		<h4>This is your dashboard.</h4>
+	</header>
+	<nav class="menu-bar" id="menu-bar">
 
-        <ul>
-            Jump To:
-            <li>
-                <a href="#settings">Settings</a>
-            </li>
-        </ul>
-    </nav>
-    <section id="user-notes">
+		<ul>
+			Jump To:
+			<li>
+				<a href="#settings">Settings</a>
+			</li>
+		</ul>
+	</nav>
+	<section id="user-notes">
 
-        <head>
-            <h3>Notes</h3>
-        </head>
-        <div role="main" class="main-notes-container">
-            <table>
-                {{#if notes}}
-                {{#each notes}}
-                <tr>
-                    <th>
-                        {{!-- in div to resize  --}}
-                        <div>
-                            {{this.formattedDate}}
-                        </div>
-                    </th>
-                    <td>{{this.content}}</td>
-                </tr>
-                {{/each}}
-                {{else}}
-                <li>No notes created yet.</li>
-                {{/if}}
+		<head>
+			<h3>Notes</h3>
+		</head>
+		<div role="main" class="main-notes-container">
+			<table>
+				{{#if notes}}
+					{{#each notes}}
+						<tr>
+							<th>
+								{{! in div to resize  }}
+								<div>
+									{{this.formattedDate}}
+								</div>
+							</th>
+							<td>{{this.content}}</td>
+						</tr>
+					{{/each}}
+				{{else}}
+					<li>No notes created yet.</li>
+				{{/if}}
 
-            </table>
-        </div>
-        <footer>
-            <a href="#">Back to top</a>
-        </footer>
-    </section>
-    <section id="settings">
+			</table>
+		</div>
+		<footer>
+			<a href="#">Back to top</a>
+		</footer>
+	</section>
+	<section id="settings">
 
-        <head>
-            <h3>Settings</h3>
-        </head>
-        <div role="main">
-            <div class="left-side">
-                <button id="button-planner" class="active">Planner</button>
-                <button id="button-account">Account</button>
-            </div>
-            <div class="right-side">
-                <ul id="planner-settings">
-                    <li>
-                        <label for="#start-hour">Start Time (24h):</label>
-                        <input type="number" value="{{user.startTime}}" min="0" max="24" id="start-hour" />
-                        {{!-- <select name="start-time-ampm" id="start-time-ampm">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select> --}}
-                        <span>(current {{user.startTime}})</span>
-                    </li>
-                    <li>
-                        <label for="#end-time">End Time (24h):</label>
-                        <input type="number" value="{{user.endTime}}" min="0" max="24" id="end-time" />
-                        {{!-- <select name="end-time-ampm" id="end-time-ampm">
-                        <option value="AM">AM</option>
-                        <option value="PM">PM</option>
-                    </select> --}}
-                        <span>(current {{user.endTime}})</span>
-                    </li>
-                    <p><i>(am/pm options coming soon)</i></p>
-                    <button value="Submit" type="submit" name="save-btn">Save</button>
-                </ul>
-                <ul data-userid={{userID}} id="account-settings" style="display: none;">
-                    <li>
-                        <label for="#firstname">First Name:</label>
-                        <input type="text" name="firstname" id="firstname" />
-                    </li>
-                    <li>
-                        <label for="#lastname">Last Name: </label>
-                        <input type="text" name="lastname" id="lastname" />
-                    </li>
-                    <button value="Submit" type="submit" name="save-btn">Save</button>
-                </ul>
-            </div>
-        </div>
-        <footer>
-            <a href="#">Back to top</a>
+		<head>
+			<h3>Settings</h3>
+		</head>
+		<div role="main">
+			<div class="left-side">
+				<button id="buttonPlanner" class="active">Planner</button>
+				<button id="buttonAccount">Account</button>
+			</div>
+			<div class="right-side">
+				<ul id="planner-settings">
+					<form id="startHourForm">
+						<li>
+							<label for="#startHour">Start Time:</label>
+							<select
+								data-start-hour={{user.startTime}}
+								name="startHour"
+								id="startHour"
+								aria-valuemax="24"
+								aria-valuemin="0"
+								form="#startHourForm"
+							>
+								<option value="1">1:00 AM</option>
+								<option value="2">2:00 AM</option>
+								<option value="3">3:00 AM</option>
+								<option value="4">4:00 AM</option>
+								<option value="5">5:00 AM</option>
+								<option value="6">6:00 AM</option>
+								<option value="7">7:00 AM</option>
+								<option value="8">8:00 AM</option>
+								<option value="9">9:00 AM</option>
+								<option value="10">10:00 AM</option>
+								<option value="11">11:00 AM</option>
+								<option value="12">12:00 PM</option>
+								<option value="13">1:00 PM</option>
+								<option value="14">2:00 PM</option>
+								<option value="15">3:00 PM</option>
+								<option value="16">4:00 PM</option>
+								<option value="17">5:00 PM</option>
+								<option value="18">6:00 PM</option>
+								<option value="19">7:00 PM</option>
+								<option value="20">8:00 PM</option>
+								<option value="21">9:00 PM</option>
+								<option value="22">10:00 PM</option>
+								<option value="23">11:00 PM</option>
+								<option value="24">12:00 AM</option>
+							</select>
+							<span>(current {{convert24to12 user.startTime}})</span>
+						</li>
+						{{!-- <li>
+							<label for="#lengthOfDay">Length of day (default: 9)</label>
+							<input
+								type="number"
+								value="{{user.endTime}}"
+								min="0"
+								max="24"
+								id="lengthOfDay"
+								disabled
+							/>
+							<span>(current {{user.endTime}})</span>
+						</li> --}}
+						<button
+							value="save"
+							type="submit"
+							name="save-btn"
+							form="startHourForm"
+						>Save</button>
+					</form>
+				</ul>
+				<ul data-userid={{userID}} id="account-settings" style="display: none;">
+					<li>
+						<label for="#firstname">First Name:</label>
+						<input type="text" name="firstname" id="firstname" />
+					</li>
+					<li>
+						<label for="#lastname">Last Name: </label>
+						<input type="text" name="lastname" id="lastname" />
+					</li>
+					<button value="Submit" type="submit" name="save-btn">Save</button>
+				</ul>
+			</div>
+		</div>
+		<footer>
+			<a href="#">Back to top</a>
 
-        </footer>
-    </section>
-
+		</footer>
+	</section>
 
 </div>
 <script>
-    document.getElementById(`nav-dashboard-link`).classList.add(`active`)
+	document.getElementById(`nav-dashboard-link`).classList.add(`active`)
 </script>
 <!-- own JS  -->
 <script src="./dist/dashboard.js"></script>
