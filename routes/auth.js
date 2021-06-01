@@ -9,7 +9,7 @@ module.exports = function (app, passport) {
 		res.redirect("/planner")
 	})
 	// logged in
-	app.get("/settings", utils.isLoggedIn, authController.settings)
+	app.post("/api/settings:hour", utils.isLoggedIn, authController.postStartHour)
 	app.get("/dashboard", utils.isLoggedIn, authController.pages)
 	app.get("/planner", utils.isLoggedIn, authController.pages)
 
