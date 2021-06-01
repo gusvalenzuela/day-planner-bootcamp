@@ -12,6 +12,7 @@ let currentDateTime = moment()
 let currentDateTimeFormatted = currentDateTime.format(`ddd, ll`)
 
 const USER_ID = Number(timeblockHTMLContainer.dataset.userid) || undefined
+const startTime = Number(timeblockHTMLContainer.dataset.startTime) || 9
 
 init()
 
@@ -68,19 +69,19 @@ function handleDateRowEvents(e) {
 	generateTimeSlots()
 	currentDayHTMLElement.textContent = currentDateTime.format(`ddd, ll`)
 }
+function printNoteContentToDOM(note) {
+	const currentTextareaElement = document.getElementById(
+		`textarea-${note.datestamp}`,
+	)
+	if (currentTextareaElement) {
+		currentTextareaElement.value = note.content
+	}
+}
 
 function printSavedData() {
 	// currently placing userid in element via handlebars
 	API.getUserNotes(USER_ID).then(userNotes => {
-		// console.log(userNotes)
-		userNotes.forEach(note => {
-			const currentTextareaElement = document.getElementById(
-				`textarea-${note.datestamp}`,
-			)
-			if (currentTextareaElement) {
-				currentTextareaElement.value = note.content
-			}
-		})
+		userNotes.forEach(printNoteContentToDOM)
 	})
 }
 
@@ -112,7 +113,7 @@ function cleanTimeBlocks() {
 	//
 }
 function generateTimeSlots(
-	time = 9,
+	time = startTime,
 	amount = 9,
 	input = `enter your plans here`,
 ) {
@@ -189,16 +190,9 @@ function generateTimeSlots(
 	// localStorage.setItem(`storedSlotData`,JSON.stringify(storedSlotData))
 }
 
-async function savetoDBStorage(data) {
-	await fetch(`/api/notes${USER_ID}`, {
-		method: "POST",
-		body: JSON.stringify(data),
-		headers: {
-			"Content-type": "application/json; charset=UTF-8",
-		},
-	}).then(r => r.json())
-
-	generateTimeSlots()
+function savetoDBStorage(note) {
+	API.postNote(note)
+	printNoteContentToDOM(note)
 }
 
 function handleTimeblockEvents(e) {
@@ -212,14 +206,14 @@ function handleTimeblockEvents(e) {
 			var noteTextarea = document.getElementById(`textarea-${buttonDateStamp}`)
 			var noteContent = noteTextarea.value
 			var noteStamp = noteTextarea.dataset.datestamp || buttonDateStamp
-			var noteObj = {
+			var note = {
 				title: noteStamp,
 				content: noteContent,
 				datestamp: noteStamp,
 				datetime: buttonDateTime,
 				UserId: USER_ID, // currently placing it in element via handlebars
 			}
-			savetoDBStorage(noteObj)
+			savetoDBStorage(note)
 			break
 		case `expandBtn`:
 			alert(`Expanding`)
